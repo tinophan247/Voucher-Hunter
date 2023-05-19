@@ -18,14 +18,14 @@ const TaiXiu = () => {
       <ExtraHeader />
       <div className="w-full flex justify-center">
         <div className="bg-game w-[70%] h-[70%] fixed font-pony">
-          <div className="text-center mt-20 text-6xl">Game Tài Xỉu</div>
-          <div className="grid grid-grow-3 grid-flow-col text-center mt-20">
+          <div className="text-center mt-10 text-4xl">Game Tài Xỉu</div>
+          <div className="grid grid-grow-3 grid-flow-col text-center mt-10">
             <div className="col-span-5">
               <button
                 onClick={() => {
                   dispatch(DiceBeting(true));
                 }}
-                className="uppercase w-200 h-200 text-4xl bg-yellow-100 hover:bg-yellow-200 border-4 border-black rounded-xl"
+                className="uppercase w-40 h-40 text-4xl bg-yellow-100 hover:bg-yellow-200 border-4 border-black rounded-xl"
               >
                 Tài
               </button>
@@ -38,7 +38,7 @@ const TaiXiu = () => {
                 onClick={() => {
                   dispatch(DiceBeting(false));
                 }}
-                className="uppercase w-200 h-200 text-4xl bg-yellow-100 hover:bg-yellow-200  border-4 border-black rounded-xl"
+                className="uppercase w-40 h-40 text-4xl bg-yellow-100 hover:bg-yellow-200  border-4 border-black rounded-xl"
               >
                 Xỉu
               </button>
@@ -68,7 +68,7 @@ const TaiXiu = () => {
               onClick={() => {
                 dispatch(PlayGame());
               }}
-              className="w-40 h-20 mt-20 text-3xl bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
+              className="w-40 h-20 mt-10 text-3xl bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
             >
               Start
             </button>

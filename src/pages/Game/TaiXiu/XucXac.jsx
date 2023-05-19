@@ -7,7 +7,7 @@ const XucXac = () => {
   return (
     <div className='flex'>
         {diceArray.map((item, index) => {
-            return <img key={index} src={item.img} alt='not-found' className='w-32 h-32'/>
+            return <img key={index} src={item.img} alt='not-found' className='w-20 h-20 '/>
         })}
     </div>
   )

@@ -1,5 +1,5 @@
 import { Box, Modal, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const style = {
   position: 'absolute',
@@ -14,10 +14,12 @@ const style = {
 };
 
 const ModalGame = ({showModal}) => {
+  const [open ,setOpen ] = useState(showModal)
 
   return (
     <Modal
-        open={showModal}
+        open={open}
+        onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
