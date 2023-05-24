@@ -15,7 +15,7 @@ const BauCua = () => {
       <Header />
       <ExtraHeader />
       <div className="w-full flex justify-center">
-        <div className="bg-game w-[70%] h-[70%] fixed font-pony">
+        <div className="bg-game w-[80%] h-[80%] fixed font-pony">
           <DiemCuoc />
           <div className=" mt-10">
             <DanhSachCuoc />
