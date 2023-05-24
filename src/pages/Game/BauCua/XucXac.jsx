@@ -20,7 +20,7 @@ const XucXac = ({diceItem}) => {
 
   return (
     <Fragment>
-      <div className="scene ml-[55px]">
+      <div className="scene ml-[55px] mt-14">
         <animated.div
           className="cube"
           style={{
