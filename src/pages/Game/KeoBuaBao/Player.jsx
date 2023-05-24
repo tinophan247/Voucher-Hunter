@@ -14,7 +14,7 @@ const Player = () => {
           className="mt-3"
           width={100}
           height={100}
-          src="./img/gameOanTuXi/bao.png"
+          src={KBBArray.find(item => item.beting === true).img}
           alt="not-found"
         />
       </div>

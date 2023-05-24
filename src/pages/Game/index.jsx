@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const GamePage = () => {
   return (
     <div className=" grid grid-cols-3 gap-20 mx-20">
-      <div className="col-span-2 bg-blue-300 h-680 w-full"></div>
+      <img src="./img/Banner.png" alt="not-found" className="col-span-2 h-680 w-full"/>
       <div>
         <Link to="/TaiXiu">
           <img
