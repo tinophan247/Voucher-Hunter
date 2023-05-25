@@ -9,7 +9,7 @@ const initialState = {
     { id: "cua", img: "./img/gameBauCua/cua.png", betingScore: 0 },
     { id: "tom", img: "./img/gameBauCua/tom.png", betingScore: 0 },
   ],
-  totalScore: 3,
+  totalScore: 1,
   DiceArray: [{ id: "bau", img: "./img/gameBauCua/bau.png" }],
   result: undefined,
 };
@@ -47,7 +47,7 @@ const BauCuaSlice = createSlice({
       state.BauCuaArray = BauCuaArrayUpdate;
     },
     PlayAgain: (state) => {
-      state.totalScore = 3;
+      state.totalScore = 1;
       state.BauCuaArray = state.BauCuaArray.map((item) => {
         return { ...item, betingScore: 0 };
       });
