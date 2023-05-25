@@ -70,8 +70,18 @@ const BauCuaSlice = createSlice({
         let indexBauCuaArr = state.BauCuaArray.findIndex(
           (item) => item.id === xucXacNN.id
         );
+
         if (index !== -1) {
           state.totalScore += state.BauCuaArray[indexBauCuaArr].betingScore;
+        }
+
+        if (state.totalScore === 0) {
+          state.result = false;
+        } else if (
+          state.totalScore > 0 &&
+          state.BauCuaArray[indexBauCuaArr].betingScore > 0
+        ) {
+          state.result = true;
         }
       });
 
@@ -79,11 +89,6 @@ const BauCuaSlice = createSlice({
       state.BauCuaArray = state.BauCuaArray.map((item) => {
         return { ...item, betingScore: 0 };
       });
-      if (state.totalScore === 0) {
-        state.result = false;
-      } else {
-        state.result = true;
-      }
     },
   },
 });

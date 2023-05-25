@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import ModalGame from "../Modal";
 
 const BauCua = () => {
-  const {result} = useSelector(state => state.BauCua);
+  const { result } = useSelector((state) => state.BauCua);
 
   return (
     <div className="w-full h-full">
@@ -21,10 +21,10 @@ const BauCua = () => {
             <DanhSachCuoc />
           </div>
           {result === false && (
-                <p className="text-4xl text-red-500 text-center">
-                  Thua rồi bấm chơi lại để chơi tiếp nhé
-                </p>
-              )}
+            <p className="text-4xl text-red-500 text-center">
+              Thua rồi bấm chơi lại để chơi tiếp nhé
+            </p>
+          )}
           <div className="flex justify-center items-center">
             <DanhSachXucXac />
           </div>
