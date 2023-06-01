@@ -11,6 +11,9 @@ import VoucherManagement from "./pages/AdminSite/VoucherManagement";
 import PartnerManagement from "./pages/AdminSite/ParterManagement";
 import EventManagement from "./pages/AdminSite/EventManagement";
 import UserManagement from "./pages/AdminSite/UserManagement";
+import Register from "./pages/Register";
+import TypeOfStore from "./pages/AdminSite/TypeOfStore";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
       <Route path="/partner-management" element={<PartnerManagement />} />
       <Route path="/event-management" element={<EventManagement />} />
       <Route path="/user-management" element={<UserManagement />} />
+      <Route path='/register' element={<Register />} />
+      <Route path='/login' element={<Login/>} />
+      <Route path='/type-of-store' element={<TypeOfStore/>} />
     </Routes>
   );
 }

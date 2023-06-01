@@ -157,3 +157,15 @@ export const defaultMyVoucher = {
   start: '',
   expired :''
 }
+
+function createToSData(typeId, description, stores ) {
+  return { typeId, description, stores};
+}
+
+export const ToSData = [
+  createToSData(
+    1,
+    "Test",
+    []
+  ),
+];

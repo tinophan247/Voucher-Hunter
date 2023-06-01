@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AdminSiteLayout from "../AdminSiteLayout";
 import {
   Paper,
@@ -12,8 +12,16 @@ import { StyledTableCell, StyledTableRow } from "../../MyVoucher/styledTable";
 import { PartnerData } from "../../../constant";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import { useDispatch } from "react-redux";
+import { getListPartner } from "../../../redux/partnerSlice";
 
 const PartnerManagement = () => {
+  const dispatch = useDispatch();  
+
+  useEffect(() =>{
+    dispatch(getListPartner());
+  })
+
   return (
     <AdminSiteLayout>
       <div>
