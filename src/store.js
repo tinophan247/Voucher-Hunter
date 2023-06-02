@@ -5,6 +5,7 @@ import BauCuaReducer from './redux/BauCua';
 import authReducer from './redux/authSlice';
 import partnerReducer from './redux/partnerSlice';
 import typeOfStoreReducer from './redux/typeOfStoreSlice';
+import voucherReducer from './redux/voucherSlice';
 
 const store = configureStore({
     reducer:{
@@ -13,7 +14,8 @@ const store = configureStore({
       BauCua : BauCuaReducer,
       auth : authReducer,
       partner: partnerReducer,
-      typeOfStore: typeOfStoreReducer
+      typeOfStore: typeOfStoreReducer,
+      voucher: voucherReducer
     }
   })
   

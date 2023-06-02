@@ -19,6 +19,7 @@ const initialAuthState = {
   credentials: {
     name: "",
     roleName: "",
+    avatar: ""
   },
   error: false,
   message: "",
@@ -68,6 +69,7 @@ const authSlice = createSlice({
       state.credentials = {
         name: action.payload.fullName,
         roleName: action.payload.role,
+        avatar: action.payload.avatar,
       };
     });
     // Request error

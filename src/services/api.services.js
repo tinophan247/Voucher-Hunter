@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import reqInstance from "../config/axios/reqInstance";
 
 export class ApiService {

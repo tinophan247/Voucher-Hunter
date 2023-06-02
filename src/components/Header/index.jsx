@@ -21,7 +21,7 @@ const Header = () => {
         <div className="flex gap-10 items-center text-xl font-bold">
           <p>Xin Chào, {credentials.name}</p>
           <img
-            src="./img/avatar.jpg"
+            src={credentials.avatar ? credentials.avatar : "./img/avatar.jpg"}
             alt="not-found"
             className="w-12 h-12 rounded-full"
           />

@@ -4,7 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers";
 
-const DatePickers = ({ width = "450px", value, onChange }) => {
+const DatePickers = ({label='Ngày/Tháng/Năm sinh', width = "450px", value, onChange }) => {
   return (
     <div className="text-base font-medium">
       <Box
@@ -19,7 +19,7 @@ const DatePickers = ({ width = "450px", value, onChange }) => {
         <FormControl fullWidth>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-            label={'Ngày/Tháng/Năm sinh'}
+            label={label}
               value={value}
               onChange={onChange}
               width={width}

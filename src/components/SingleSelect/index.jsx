@@ -22,7 +22,7 @@ const SingleSelect = ({
             size='small'
             displayEmpty
             renderValue={
-              value !== 0 ? undefined : () => <ul className='text-gray-500'>{label}</ul>
+              (value !== 0 && value !== '') ? undefined : () => <ul className='text-gray-500'>{label}</ul>
             }
             MenuProps={{
               PaperProps: {

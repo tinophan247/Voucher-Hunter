@@ -64,6 +64,7 @@ const TypeOfStore = () => {
 
   useEffect(() => {
     dispatch(getListToS());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

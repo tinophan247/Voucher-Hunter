@@ -52,7 +52,7 @@ export default function CreateEditToS({ isShow, handleCloseModal, data }) {
             <div className="flex justify-between">
               <div />
               <div className="text-xl font-bold text-center">
-                Tạo mới Loại Cừa hàng
+                Tạo mới Loại Cửa hàng
               </div>
               <div
                 className="cursor-pointer"
