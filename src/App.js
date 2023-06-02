@@ -14,6 +14,7 @@ import UserManagement from "./pages/AdminSite/UserManagement";
 import Register from "./pages/Register";
 import TypeOfStore from "./pages/AdminSite/TypeOfStore";
 import Login from "./pages/Login";
+import StoreManagement from "./pages/AdminSite/StoreManagement";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login/>} />
       <Route path='/type-of-store' element={<TypeOfStore/>} />
+      <Route path='/store' element={<StoreManagement/>} />
     </Routes>
   );
 }

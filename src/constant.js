@@ -158,14 +158,45 @@ export const defaultMyVoucher = {
   expired :''
 }
 
-function createToSData(typeId, description, stores ) {
-  return { typeId, description, stores};
+export const StoreList = [
+  {
+    id : 1,
+    partnerName : 'Golden Gate',
+    storeName: 'Kichi Kichi',
+    address: '113 Nguyễn Ảnh Thủ',
+    ward: 'Hiệp Thành',
+    district: 'Quận 12',
+    province: 'Thành Phố Hồ Chí Minh',
+    tos : 'Nhà hàng'
+  }
+]
+
+export const defaultTypeOfStore = {
+  id: 0 , 
+  description: "" 
 }
 
-export const ToSData = [
-  createToSData(
-    1,
-    "Test",
-    []
-  ),
-];
+export const defaultVoucher = {
+  id: 0,
+  name: "",
+  description: "",
+  discount: "",
+  img: "",
+  code: "",
+  condition1: "",
+  condition2: "",
+  tos: "",
+  startDate: null,
+  endDate: null,
+}
+
+export const defaultStore = {
+  id: 0,
+  partnerName: "",
+  storeName: "",
+  address: "",
+  ward: "",
+  district: "",
+  province: "",
+  tos: ""
+}

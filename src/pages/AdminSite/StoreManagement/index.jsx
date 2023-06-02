@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import AdminSiteLayout from "../AdminSiteLayout";
 import {
@@ -11,69 +12,78 @@ import {
 import { StyledTableCell, StyledTableRow } from "../../MyVoucher/styledTable";
 import EditIcon from "@mui/icons-material/Edit";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getListToS,
-  typeOfStoreActions,
-} from "../../../redux/typeOfStoreSlice";
 import Loader from "../../../components/Loader";
 import Notification from "../../../components/Notification";
-import CreateEditToS from "./createEditToS";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ConfirmModal from "../../../components/Modal/ConfirmModal";
-import { defaultTypeOfStore } from "../../../constant";
+import ConfirmModalVoucher from "../../../components/Modal/ConfirmModalVoucher";
+import { defaultStore } from "../../../constant";
+import { StoreActions, getListStore } from "../../../redux/storeSlice";
+import CreateEditStore from "./createEditStore";
+import ConfirmModalStore from "../../../components/Modal/ConfirmModalStore";
 
-const TypeOfStore = () => {
-  const dispatch = useDispatch();
-  const { ToSList, isLoading, message, isSuccess } = useSelector(
-    (state) => state.typeOfStore
-  );
+const StoreManagement = () => {
+    const { StoreList, isLoading, isSuccess, message } = useSelector(
+      (state) => state.store
+    );
+    const dispatch = useDispatch();
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [tos, setTos] = useState(defaultTypeOfStore);
+  const [store, setStore] = useState(defaultStore);
   const [showModal, setShowModal] = useState(false);
 
-  const handleDestroyErr = () => {
-    dispatch(typeOfStoreActions.destroyerror());
+    const handleDestroyErr = () => {
+      dispatch(StoreActions.destroyerror());
+    };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setIsCreate(false);
+    setIsEdit(false);
+    setStore(defaultStore);
   };
 
   const handleCreate = () => {
     setIsCreate(true);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setIsCreate(false);
-    setIsEdit(false);
-    setTos(defaultTypeOfStore);
-  };
-
   const handleEdit = (item) => {
-    setTos({
+    setStore({
       id: item.id,
-      description: item.description,
+      partnerName: item.partnerName,
+      storeName: item.storeName,
+      address: item.address,
+      ward: item.ward,
+      district: item.district,
+      province: item.province,
+      tos: item.tos,
     });
     setIsEdit(true);
   };
 
-  const handleDeleteToS = (item) => {
-    setTos({
+  const handleDelete = (item) => {
+    setStore({
       id: item.id,
-      description: item.description,
+      partnerName: item.partnerName,
+      storeName: item.storeName,
+      address: item.address,
+      ward: item.ward,
+      district: item.district,
+      province: item.province,
+      tos: item.tos,
     });
     setShowModal(true);
   };
 
-  useEffect(() => {
-    dispatch(getListToS());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    useEffect(() => {
+      dispatch(getListStore());
+    }, []);
 
   return (
     <AdminSiteLayout>
       <div>
         <div className="flex justify-between pr-5">
           <p className="text-base uppercase font-medium mb-10">
-            Quản lý loại cửa hàng
+            Quản trị Cửa hàng
           </p>
           <button
             onClick={() => handleCreate()}
@@ -83,7 +93,7 @@ const TypeOfStore = () => {
           </button>
         </div>
         <TableContainer sx={{ maxHeight: 640 }} component={Paper}>
-          <Table sx={{ minWidth: 700 }}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
                 <StyledTableCell style={{ textTransform: "uppercase" }}>
@@ -93,26 +103,68 @@ const TypeOfStore = () => {
                   style={{ textTransform: "uppercase" }}
                   align="center"
                 >
-                  Mô tả
+                  Tên Đối Tác
+                </StyledTableCell>
+                <StyledTableCell
+                  style={{ textTransform: "uppercase", width: "160px" }}
+                  align="center"
+                >
+                  Tên Thương Mại
+                </StyledTableCell>
+                <StyledTableCell
+                  style={{ textTransform: "uppercase", width: "160px" }}
+                  align="center"
+                >
+                  Địa chỉ
                 </StyledTableCell>
                 <StyledTableCell
                   style={{ textTransform: "uppercase" }}
-                  align="right"
+                  align="center"
+                >
+                  Phường/Xã
+                </StyledTableCell>
+                <StyledTableCell align="center">Quận/Huyện</StyledTableCell>
+                <StyledTableCell align="center">Thành Phố/Tỉnh</StyledTableCell>
+                <StyledTableCell
+                  style={{ textTransform: "uppercase" }}
+                  align="center"
+                >
+                  Loại cửa hàng
+                </StyledTableCell>
+                <StyledTableCell
+                  style={{ textTransform: "uppercase" }}
+                  align="center"
                 >
                   Chỉnh sửa
                 </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {ToSList.length > 0 &&
-                ToSList.map((item, index) => (
+              {StoreList.length > 0 &&
+                StoreList.map((item, index) => (
                   <StyledTableRow key={index}>
                     <StyledTableCell component="th" scope="row">
                       {item.id}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {item.description}
+                      {item.partnerName}
                     </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {item.storeName}
+                    </StyledTableCell>
+                    <StyledTableCell title={item.address} align="center">
+                      <div className=" truncate w-40">{item.address}</div>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {item.ward}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {item.district}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {item.province}
+                    </StyledTableCell>{" "}
+                    <StyledTableCell align="center">{item.tos}</StyledTableCell>
                     <StyledTableCell>
                       <div className="flex justify-end gap-2">
                         <div
@@ -122,7 +174,7 @@ const TypeOfStore = () => {
                           <EditIcon />
                         </div>
                         <div
-                          onClick={() => handleDeleteToS(item)}
+                          onClick={() => handleDelete(item)}
                           className="bg-red-500 w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
                         >
                           <DeleteIcon />
@@ -138,22 +190,22 @@ const TypeOfStore = () => {
               <Loader />
             </div>
           )}
-          {!isLoading && ToSList.length === 0 && (
+          {!isLoading && StoreList.length === 0 && (
             <div className="w-full h-14 flex justify-center items-center">
               Không có dữ liệu.
             </div>
           )}
         </TableContainer>
-        <CreateEditToS
+        <CreateEditStore
           isShow={isCreate || isEdit}
           handleCloseModal={handleCloseModal}
-          data={tos}
+          data={store}
           isCreate={isCreate}
         />
         {showModal && (
-          <ConfirmModal
+          <ConfirmModalStore
             showModal={showModal}
-            data={tos}
+            data={store}
             handleCloseModal={handleCloseModal}
           />
         )}
@@ -170,4 +222,4 @@ const TypeOfStore = () => {
   );
 };
 
-export default TypeOfStore;
+export default StoreManagement;

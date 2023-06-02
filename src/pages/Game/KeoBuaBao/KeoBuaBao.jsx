@@ -10,7 +10,6 @@ import ExtraHeader from "../../../components/ExtraHeader";
 const KeoBuaBao = () => {
   const dispatch = useDispatch();
   const { result } = useSelector((state) => state.KBB);
-  console.log(result);
 
   const handlePlayGame = () => {
     let count = 0;

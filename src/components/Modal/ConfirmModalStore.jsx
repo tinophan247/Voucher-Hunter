@@ -1,8 +1,8 @@
 import { Box, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { deleteToS } from "../../redux/typeOfStoreSlice";
 import { useDispatch } from "react-redux";
-import { defaultTypeOfStore } from "../../constant";
+import { defaultStore } from "../../constant";
+import { deleteStore } from "../../redux/storeSlice";
 
 const style = {
   position: "absolute",
@@ -16,16 +16,22 @@ const style = {
   p: 4,
 };
 
-const ConfirmModal = ({ showModal, data, handleCloseModal }) => {
+const ConfirmModalStore = ({ showModal, data, handleCloseModal }) => {
   const dispatch = useDispatch();
-  const [formState, setFormState] = useState(defaultTypeOfStore);
+  const [formState, setFormState] = useState(defaultStore);
 
   const handleDelete = () => {
     const newData = {
-      id: formState.id || undefined,
-      description: formState.description,
-    };
-    dispatch(deleteToS(newData));
+        id: formState.id || undefined,
+        partnerName: formState.partnerName,
+        storeName: formState.storeName,
+        address: formState.address,
+        ward: formState.ward,
+        district: formState.district,
+        province: formState.province,
+        tos: formState.tos,
+      };
+    dispatch(deleteStore(newData));
 
     setTimeout(() => {
       window.location.reload(true);
@@ -72,4 +78,4 @@ const ConfirmModal = ({ showModal, data, handleCloseModal }) => {
   );
 };
 
-export default ConfirmModal;
+export default ConfirmModalStore;

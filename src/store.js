@@ -6,6 +6,7 @@ import authReducer from './redux/authSlice';
 import partnerReducer from './redux/partnerSlice';
 import typeOfStoreReducer from './redux/typeOfStoreSlice';
 import voucherReducer from './redux/voucherSlice';
+import storeReducer from './redux/storeSlice';
 
 const store = configureStore({
     reducer:{
@@ -15,7 +16,8 @@ const store = configureStore({
       auth : authReducer,
       partner: partnerReducer,
       typeOfStore: typeOfStoreReducer,
-      voucher: voucherReducer
+      voucher: voucherReducer,
+      store: storeReducer
     }
   })
   

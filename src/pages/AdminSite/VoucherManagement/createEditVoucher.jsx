@@ -10,6 +10,7 @@ import TextFields from "../../../components/TextField";
 import SingleSelect from "../../../components/SingleSelect";
 import DatePickers from "../../../components/DatePicker";
 import { createVoucher, updateVoucher } from "../../../redux/voucherSlice";
+import { defaultVoucher } from "../../../constant";
 
 const style = {
   position: "absolute",
@@ -26,19 +27,7 @@ const style = {
 export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
   const { ToSList } = useSelector((state) => state.typeOfStore);
   const dispatch = useDispatch();
-  const [formState, setFormState] = useState({
-    id: 0,
-    name: "",
-    description: "",
-    discount: "",
-    img: "",
-    code:"",
-    condition1: "",
-    condition2: "",
-    tos: "",
-    startDate: null,
-    endDate: null,
-  });
+  const [formState, setFormState] = useState(defaultVoucher);
 
   const convertDataToS = (array) => {
     const DataList = array.map((item) => ({

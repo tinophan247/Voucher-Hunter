@@ -5,6 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
 import { createtoS, updateToS } from "../../../redux/typeOfStoreSlice";
 import TextFields from "../../../components/TextField";
+import { defaultTypeOfStore } from "../../../constant";
 
 const style = {
   position: "absolute",
@@ -20,7 +21,7 @@ const style = {
 
 export default function CreateEditToS({ isShow, handleCloseModal, data }) {
   const dispatch = useDispatch();
-  const [formState, setFormState] = useState({id: 0 , description: "" });
+  const [formState, setFormState] = useState(defaultTypeOfStore);
 
   const handleSubmitForm = (e) => {
     try {

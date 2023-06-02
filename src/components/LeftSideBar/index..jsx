@@ -6,6 +6,7 @@ import EventIcon from "@mui/icons-material/Event";
 import Person2Icon from "@mui/icons-material/Person2";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import ShopIcon from '@mui/icons-material/Shop';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 
 const LeftSideBar = () => {
   const activeClassname =
@@ -113,6 +114,25 @@ const LeftSideBar = () => {
             }`}
           >
             User Management
+          </p>
+        </div>
+      </NavLink>
+      <NavLink
+        to="/store"
+        className={({ isActive }) =>
+          isActive ? activeClassname : unactiveClassname
+        }
+      >
+        <div className="flex ml-4 ">
+          <StorefrontIcon
+            stroke={pathname === "/store" ? "#457900" : "#888888"}
+          />
+          <p
+            className={`ml-2 text-base ${
+              pathname === "/store" ? "text-[#457900]" : "text-black"
+            }`}
+          >
+            Store Management
           </p>
         </div>
       </NavLink>

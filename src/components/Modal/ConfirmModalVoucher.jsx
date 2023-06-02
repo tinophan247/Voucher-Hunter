@@ -2,6 +2,7 @@ import { Box, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteVoucher } from "../../redux/voucherSlice";
+import { defaultVoucher } from "../../constant";
 
 const style = {
   position: "absolute",
@@ -17,19 +18,7 @@ const style = {
 
 const ConfirmModalVoucher = ({ showModal, data, handleCloseModal }) => {
   const dispatch = useDispatch();
-  const [formState, setFormState] = useState({
-    id: 0,
-    name: "",
-    description: "",
-    discount: "",
-    img: "",
-    code: "",
-    condition1: "",
-    condition2: "",
-    tos: "",
-    startDate: null,
-    endDate: null,
-  });
+  const [formState, setFormState] = useState(defaultVoucher);
 
   const handleDelete = () => {
     const newData = {

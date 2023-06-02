@@ -20,25 +20,16 @@ import Notification from "../../../components/Notification";
 import DeleteIcon from "@mui/icons-material/Delete";
 import dayjs from "dayjs";
 import ConfirmModalVoucher from "../../../components/Modal/ConfirmModalVoucher";
+import { defaultVoucher } from "../../../constant";
 
 const VoucherManagement = () => {
-  const { VoucherList, isLoading, isSuccess, message } = useSelector((state) => state.voucher);
+  const { VoucherList, isLoading, isSuccess, message } = useSelector(
+    (state) => state.voucher
+  );
   const dispatch = useDispatch();
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [voucher, setVoucher] = useState({
-    id: 0,
-    name: "",
-    description: "",
-    discount: "",
-    img: "",
-    code:"",
-    condition1: "",
-    condition2: "",
-    tos: "",
-    startDate: null,
-    endDate: null,
-  });
+  const [voucher, setVoucher] = useState(defaultVoucher);
   const [showModal, setShowModal] = useState(false);
 
   const handleDestroyErr = () => {
@@ -49,19 +40,7 @@ const VoucherManagement = () => {
     setShowModal(false);
     setIsCreate(false);
     setIsEdit(false);
-    setVoucher({
-      id: 0,
-      name: "",
-      description: "",
-      discount: "",
-      img: "",
-      code:"",
-      condition1: "",
-      condition2: "",
-      tos: "",
-      startDate: null,
-      endDate: null,
-    })
+    setVoucher(defaultVoucher);
   };
 
   const handleCreate = () => {
@@ -79,7 +58,7 @@ const VoucherManagement = () => {
       condition1: item.condition1,
       condition2: item.condition2,
       tos: item.tos,
-      startDate: dayjs(item.startDate) ,
+      startDate: dayjs(item.startDate),
       endDate: dayjs(item.endDate),
     });
     setIsEdit(true);
@@ -96,7 +75,7 @@ const VoucherManagement = () => {
       condition1: item.condition1,
       condition2: item.condition2,
       tos: item.tos,
-      startDate:  dayjs(item.startDate) ,
+      startDate: dayjs(item.startDate),
       endDate: dayjs(item.endDate),
     });
     setShowModal(true);
@@ -189,57 +168,59 @@ const VoucherManagement = () => {
                 </StyledTableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {VoucherList.length > 0 &&
-                VoucherList.map((item, index) => (
-                  <StyledTableRow key={index}>
-                    <StyledTableCell component="th" scope="row">
-                      {item.id}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {item.code}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {item.name}
-                    </StyledTableCell>
-                    <StyledTableCell title={item.description} align="center">
-                      <div className=" truncate w-40">{item.description}</div>
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {item.discount}
-                    </StyledTableCell>
-                    <StyledTableCell title={item.description} align="center">
-                      <div className=" truncate w-40">{item.condition1}</div>
-                    </StyledTableCell>
-                    <StyledTableCell title={item.description} align="center">
-                      <div className=" truncate w-40">{item.condition2}</div>
-                    </StyledTableCell>
-                    <StyledTableCell align="center">{item.tos}</StyledTableCell>
-                    <StyledTableCell align="center">
-                      {moment(item.startDate).format("DD/MM/YYYY")}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {moment(item.endDate).format("DD/MM/YYYY")}
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      <div className="flex justify-end gap-2">
-                        <div
-                          onClick={() => handleEdit(item)}
-                          className="bg-green-neon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
-                        >
-                          <EditIcon />
+              <TableBody>
+                {!isLoading && VoucherList.length > 0 &&
+                  VoucherList.map((item, index) => (
+                    <StyledTableRow key={index}>
+                      <StyledTableCell component="th" scope="row">
+                        {item.id}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {item.code}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {item.name}
+                      </StyledTableCell>
+                      <StyledTableCell title={item.description} align="center">
+                        <div className=" truncate w-40">{item.description}</div>
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {item.discount}
+                      </StyledTableCell>
+                      <StyledTableCell title={item.description} align="center">
+                        <div className=" truncate w-40">{item.condition1}</div>
+                      </StyledTableCell>
+                      <StyledTableCell title={item.description} align="center">
+                        <div className=" truncate w-40">{item.condition2}</div>
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {item.tos}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {moment(item.startDate).format("DD/MM/YYYY")}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {moment(item.endDate).format("DD/MM/YYYY")}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <div className="flex justify-end gap-2">
+                          <div
+                            onClick={() => handleEdit(item)}
+                            className="bg-green-neon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
+                          >
+                            <EditIcon />
+                          </div>
+                          <div
+                            onClick={() => handleDelete(item)}
+                            className="bg-red-500 w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
+                          >
+                            <DeleteIcon />
+                          </div>
                         </div>
-                        <div
-                          onClick={() => handleDelete(item)}
-                          className="bg-red-500 w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
-                        >
-                          <DeleteIcon />
-                        </div>
-                      </div>
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+              </TableBody>
           </Table>
           {isLoading && (
             <div className="w-full h-[640px] flex justify-center items-center">
@@ -258,7 +239,7 @@ const VoucherManagement = () => {
           data={voucher}
           isCreate={isCreate}
         />
-           {showModal && (
+        {showModal && (
           <ConfirmModalVoucher
             showModal={showModal}
             data={voucher}

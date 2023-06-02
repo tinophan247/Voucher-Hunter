@@ -3,7 +3,6 @@ import Header from "../Header";
 import ExtraHeader from "../ExtraHeader";
 
 const Voucher = ({data , isEdit}) => {
-  console.log(isEdit)
   return (
     <div className="w-full h-full">
       <Header />
