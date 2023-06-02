@@ -22,14 +22,7 @@ const ConfirmModalStore = ({ showModal, data, handleCloseModal }) => {
 
   const handleDelete = () => {
     const newData = {
-        id: formState.id || undefined,
-        partnerName: formState.partnerName,
-        storeName: formState.storeName,
-        address: formState.address,
-        ward: formState.ward,
-        district: formState.district,
-        province: formState.province,
-        tos: formState.tos,
+        id: formState.id,
       };
     dispatch(deleteStore(newData));
 
