@@ -133,7 +133,7 @@ const TypeOfStore = () => {
             </TableBody>
           </Table>
           {isLoading && (
-            <div className="w-full h-615 flex justify-center items-center">
+            <div className="w-full h-[640px] flex justify-center items-center">
               <Loader />
             </div>
           )}
