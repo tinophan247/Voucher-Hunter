@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const reqInstance = axios.create({
-  baseURL: 'http://localhost:5000/api/v1',
+  baseURL: 'hhttps://voucher-hunter-api.onrender.com/api/v1',
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json'
