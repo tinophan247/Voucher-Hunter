@@ -21,18 +21,18 @@ import CreateEditStore from "./createEditStore";
 import ConfirmModalStore from "../../../components/Modal/ConfirmModalStore";
 
 const StoreManagement = () => {
-    const { StoreList, isLoading, isSuccess, message } = useSelector(
-      (state) => state.store
-    );
-    const dispatch = useDispatch();
+  const { StoreList, isLoading, isSuccess, message } = useSelector(
+    (state) => state.store
+  );
+  const dispatch = useDispatch();
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [store, setStore] = useState(defaultStore);
   const [showModal, setShowModal] = useState(false);
 
-    const handleDestroyErr = () => {
-      dispatch(StoreActions.destroyerror());
-    };
+  const handleDestroyErr = () => {
+    dispatch(StoreActions.destroyerror());
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -73,9 +73,9 @@ const StoreManagement = () => {
     setShowModal(true);
   };
 
-    useEffect(() => {
-      dispatch(getListStore());
-    }, []);
+  useEffect(() => {
+    dispatch(getListStore());
+  }, []);
 
   return (
     <AdminSiteLayout>
@@ -120,10 +120,20 @@ const StoreManagement = () => {
                   style={{ textTransform: "uppercase" }}
                   align="center"
                 >
-                  Phường/Xã
+                  Mã Phường/Xã
                 </StyledTableCell>
-                <StyledTableCell align="center">Quận/Huyện</StyledTableCell>
-                <StyledTableCell align="center">Thành Phố/Tỉnh</StyledTableCell>
+                <StyledTableCell
+                  align="center"
+                  style={{ textTransform: "uppercase", width: "160px" }}
+                >
+                  Mã Quận/Huyện
+                </StyledTableCell>
+                <StyledTableCell
+                  align="center"
+                  style={{ textTransform: "uppercase", width: "160px" }}
+                >
+                  Mã Thành Phố/Tỉnh
+                </StyledTableCell>
                 <StyledTableCell
                   style={{ textTransform: "uppercase" }}
                   align="center"
@@ -132,14 +142,14 @@ const StoreManagement = () => {
                 </StyledTableCell>
                 <StyledTableCell
                   style={{ textTransform: "uppercase" }}
-                  align="center"
+                  align="right"
                 >
                   Chỉnh sửa
                 </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {StoreList.length > 0 &&
+              {!isLoading && StoreList.length > 0 &&
                 StoreList.map((item, index) => (
                   <StyledTableRow key={index}>
                     <StyledTableCell component="th" scope="row">

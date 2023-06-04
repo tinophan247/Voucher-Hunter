@@ -1,4 +1,4 @@
-/* eslint-disable eqeqeq */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -14,6 +14,11 @@ import {
   apiGetPublicProvinces,
   apiGetPublicWards,
 } from "../../../services/api.address";
+import {
+  convertDataDistrict,
+  convertDataProvince,
+  convertDataWard,
+} from "../../../utils/helper";
 
 const style = {
   position: "absolute",
@@ -79,29 +84,7 @@ export default function CreateEditStore({ isShow, handleCloseModal, data }) {
 
   useEffect(() => {
     dispatch(getListToS());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const formatProvince = (element) => {
-    const filterProvince = provinces.filter((item) => {
-      return item.province_id == element;
-    });
-    return filterProvince.map((item) => item.province_name);
-  };
-
-  const formatDistrict = (element) => {
-    const filterDistrict = districts.filter((item) => {
-      return item.district_id == element;
-    });
-    return filterDistrict.map((item) => item.district_name);
-  };
-
-  const formatWard = (element) => {
-    const filterWard = wards.filter((item) => {
-      return item.ward_id == element;
-    });
-    return filterWard.map((item) => item.ward_name);
-  };
 
   const handleSubmitForm = (e) => {
     try {
@@ -111,9 +94,9 @@ export default function CreateEditStore({ isShow, handleCloseModal, data }) {
         partnerName: formState.partnerName,
         storeName: formState.storeName,
         address: formState.address,
-        ward: formatWard(formState.ward).toString(),
-        district: formatDistrict(formState.district).toString(),
-        province: formatProvince(formState.province).toString(),
+        ward:  formState.ward,
+        district: formState.district,
+        province: formState.province,
         tos: formState.tos,
       };
 
@@ -127,30 +110,6 @@ export default function CreateEditStore({ isShow, handleCloseModal, data }) {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const convertDataProvince = (array) => {
-    const ProvinceList = array.map((item) => ({
-      value: item.province_id,
-      label: item.province_name,
-    }));
-    return ProvinceList;
-  };
-
-  const convertDataDistrict = (array) => {
-    const DistrictList = array.map((item) => ({
-      value: item.district_id,
-      label: item.district_name,
-    }));
-    return DistrictList;
-  };
-
-  const convertDataWard = (array) => {
-    const WardList = array.map((item) => ({
-      value: item.ward_id,
-      label: item.ward_name,
-    }));
-    return WardList;
   };
 
   return (
@@ -199,7 +158,9 @@ export default function CreateEditStore({ isShow, handleCloseModal, data }) {
                     label="Tỉnh/Thành phố"
                     width="240px"
                     options={convertDataProvince(provinces)}
-                    value={formState.province}
+                    value={
+                        formState.province
+                    }
                     onChange={(event) => {
                       setFormState({
                         ...formState,

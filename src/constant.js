@@ -158,19 +158,6 @@ export const defaultMyVoucher = {
   expired :''
 }
 
-export const StoreList = [
-  {
-    id : 1,
-    partnerName : 'Golden Gate',
-    storeName: 'Kichi Kichi',
-    address: '113 Nguyễn Ảnh Thủ',
-    ward: 'Hiệp Thành',
-    district: 'Quận 12',
-    province: 'Thành Phố Hồ Chí Minh',
-    tos : 'Nhà hàng'
-  }
-]
-
 export const defaultTypeOfStore = {
   id: 0 , 
   description: "" 
@@ -200,3 +187,26 @@ export const defaultStore = {
   province: "",
   tos: ""
 }
+
+export const defaultPartner = {
+  id: 0,
+  partnerName: "",
+  description: "",
+  taxCode: "",
+  top: "",
+}
+
+export const typeOfPartner = [
+  {
+    value : 'VIP',
+    label : 'VIP'
+  },
+  {
+    value : 'Thân thiết',
+    label : 'Thân thiết'
+  },
+  {
+    value : 'Thường',
+    label : 'Thường'
+  },
+]

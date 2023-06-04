@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import  ApiStore  from "../services/api.store";
-import { StoreList } from "../constant";
 
 export const getListStore = createAsyncThunk("getListStore", async () => {
   const response = await ApiStore.getListStore();
@@ -27,7 +26,7 @@ const initialState = {
   isSuccess: false,
   error: false,
   message: "",
-  StoreList: StoreList,
+  StoreList: [],
 };
 
 const storeSlice = createSlice({
