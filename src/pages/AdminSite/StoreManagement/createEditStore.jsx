@@ -19,6 +19,7 @@ import {
   convertDataProvince,
   convertDataWard,
 } from "../../../utils/helper";
+import { getListPartner } from "../../../redux/partnerSlice";
 
 const style = {
   position: "absolute",
@@ -34,6 +35,7 @@ const style = {
 
 export default function CreateEditStore({ isShow, handleCloseModal, data }) {
   const { ToSList } = useSelector((state) => state.typeOfStore);
+  const { partnerList } = useSelector((state) => state.partner);
   const dispatch = useDispatch();
   const [formState, setFormState] = useState(defaultStore);
   const [provinces, setProvinces] = useState([]);
@@ -44,6 +46,14 @@ export default function CreateEditStore({ isShow, handleCloseModal, data }) {
     const DataList = array.map((item) => ({
       value: item.description,
       label: item.description,
+    }));
+    return DataList;
+  };
+
+  const convertDataPartner = (array) => {
+    const DataList = array.map((item) => ({
+      value: item.partnerName,
+      label: item.partnerName,
     }));
     return DataList;
   };
@@ -84,6 +94,10 @@ export default function CreateEditStore({ isShow, handleCloseModal, data }) {
 
   useEffect(() => {
     dispatch(getListToS());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getListPartner());
   }, []);
 
   const handleSubmitForm = (e) => {
@@ -131,9 +145,10 @@ export default function CreateEditStore({ isShow, handleCloseModal, data }) {
             </div>
             <div className="flex justify-center mt-5">
               <div>
-                <TextFields
+                <SingleSelect
                   label="Tên đối tác"
                   width="500px"
+                  options={convertDataPartner(partnerList)}
                   value={formState.partnerName}
                   onChange={(event) => {
                     setFormState({

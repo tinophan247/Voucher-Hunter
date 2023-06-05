@@ -24,7 +24,6 @@ const PartnerManagement = () => {
   const { partnerList, isLoading, isSuccess, message } = useSelector(
     (state) => state.partner
   );
-  console.log(partnerList)
   const dispatch = useDispatch();
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -52,7 +51,7 @@ const PartnerManagement = () => {
       partnerName: item.partnerName,
       description: item.description,
       taxCode: item.taxCode,
-      top: item.setPartner,
+      top: item.top,
     });
     setIsEdit(true);
   };
