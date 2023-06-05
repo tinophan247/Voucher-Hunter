@@ -12,6 +12,27 @@ export const register = createAsyncThunk("register", async (payload) => {
   return response;
 });
 
+export const getAllCustomer = createAsyncThunk("getAllCustomer", async () => {
+  const response = await ApiAuthGateWay.getAllCustomer();
+  return response;
+});
+
+export const updateCustomer = createAsyncThunk(
+  "updateCustomer",
+  async (payload) => {
+    const response = await ApiAuthGateWay.updateCustomer(payload);
+    return response;
+  }
+);
+
+export const deleteCustomer = createAsyncThunk(
+  "deleteCustomer",
+  async (payload) => {
+    const response = await ApiAuthGateWay.deleteCustomer(payload);
+    return response;
+  }
+);
+
 const initialAuthState = {
   isLoading: false,
   isSuccess: false,
@@ -19,10 +40,11 @@ const initialAuthState = {
   credentials: {
     name: "",
     roleName: "",
-    avatar: ""
+    avatar: "",
   },
   error: false,
   message: "",
+  userList: [],
 };
 
 const authSlice = createSlice({
@@ -78,6 +100,61 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.error = true;
       state.errorMessage = action.error.message;
+    });
+
+    //request pending
+    builder.addCase(getAllCustomer.pending, (state) => {
+      state.isLoading = true;
+    });
+    //request successful
+    builder.addCase(getAllCustomer.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.error = false;
+      state.userList = action.payload;
+    });
+    //reject
+    builder.addCase(getAllCustomer.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+      state.isSuccess = false;
+      state.message = action.error.message;
+    });
+
+    //request pending
+    builder.addCase(updateCustomer.pending, (state) => {
+      state.isLoading = true;
+    });
+    //request successful
+    builder.addCase(updateCustomer.fulfilled, (state) => {
+      state.isLoading = false;
+      state.error = false;
+      state.isSuccess = true;
+      state.message = "Sửa thành công";
+    });
+    //reject
+    builder.addCase(updateCustomer.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+      state.isSuccess = false;
+      state.message = action.error.message;
+    });
+    //request pending
+    builder.addCase(deleteCustomer.pending, (state) => {
+      state.isLoading = true;
+    });
+    //request successful
+    builder.addCase(deleteCustomer.fulfilled, (state) => {
+      state.isLoading = false;
+      state.error = false;
+      state.isSuccess = true;
+      state.message = "Xóa thành công";
+    });
+    //reject
+    builder.addCase(deleteCustomer.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+      state.isSuccess = false;
+      state.message = action.error.message;
     });
   },
 });

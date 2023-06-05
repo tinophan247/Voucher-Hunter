@@ -68,31 +68,39 @@ function createPartnerData(id, name, desc, storeType, partnerType) {
 }
 
 export const PartnerData = [
-  createPartnerData(
-    1,
-    "Cửa hàng KFC",
-    "Gà Rán",
-    "Nhà hàng KFC",
-    "Nhà hàng",
-  ),
+  createPartnerData(1, "Cửa hàng KFC", "Gà Rán", "Nhà hàng KFC", "Nhà hàng"),
   createPartnerData(
     2,
     "Phúc Long",
     "Trà sữa Phúc Long",
     "Phúc Long",
-    "Nhà hàng",
+    "Nhà hàng"
   ),
-  createPartnerData(
-    3,
-    "Highland",
-    "Highland Coffee",
-    "Highland",
-    "Nhà hàng",
-  ),
+  createPartnerData(3, "Highland", "Highland Coffee", "Highland", "Nhà hàng"),
 ];
 
-function createEventData(id, name, desc, partner,storeType, game, selectedVoucher, start, expired) {
-  return { id, name, desc, partner, storeType, game, selectedVoucher, start, expired };
+function createEventData(
+  id,
+  name,
+  desc,
+  partner,
+  storeType,
+  game,
+  selectedVoucher,
+  start,
+  expired
+) {
+  return {
+    id,
+    name,
+    desc,
+    partner,
+    storeType,
+    game,
+    selectedVoucher,
+    start,
+    expired,
+  };
 }
 
 export const EventData = [
@@ -102,8 +110,8 @@ export const EventData = [
     "Giảm Giá Gà Rán",
     "Nhà hàng KFC",
     "Nhà hàng",
-    'Game 1',
-    '',
+    "Game 1",
+    "",
     "01/05/2023",
     "31/06/2023"
   ),
@@ -113,8 +121,8 @@ export const EventData = [
     "Giảm Giá Gà Rán",
     "Nhà hàng KFC",
     "Nhà hàng",
-    'Game 1',
-    '',
+    "Game 1",
+    "",
     "01/05/2023",
     "31/06/2023"
   ),
@@ -124,15 +132,15 @@ export const EventData = [
     "Giảm Giá Gà Rán",
     "Nhà hàng KFC",
     "Nhà hàng",
-    'Game 1',
-    '',
+    "Game 1",
+    "",
     "01/05/2023",
     "31/06/2023"
   ),
 ];
 
-function createUserData(id, username, password, voucherList, role ) {
-  return { id, username, password, voucherList,role };
+function createUserData(id, username, password, voucherList, role) {
+  return { id, username, password, voucherList, role };
 }
 
 export const UserData = [
@@ -140,28 +148,28 @@ export const UserData = [
     1,
     "Nguyễn Văn A",
     "12345678",
-    [123024,123025,123026],
-    "Super Admin",
+    [123024, 123025, 123026],
+    "Super Admin"
   ),
 ];
 
 export const defaultMyVoucher = {
-  id : 0,
-  name : '',
-  desc : '',
-  discount : '',
-  condition1 : '',
-  condition2: '',
-  voucherImg : '',
-  location : '',
-  start: '',
-  expired :''
-}
+  id: 0,
+  name: "",
+  desc: "",
+  discount: "",
+  condition1: "",
+  condition2: "",
+  voucherImg: "",
+  location: "",
+  start: "",
+  expired: "",
+};
 
 export const defaultTypeOfStore = {
-  id: 0 , 
-  description: "" 
-}
+  id: 0,
+  description: "",
+};
 
 export const defaultVoucher = {
   id: 0,
@@ -175,7 +183,7 @@ export const defaultVoucher = {
   tos: "",
   startDate: null,
   endDate: null,
-}
+};
 
 export const defaultStore = {
   id: 0,
@@ -185,8 +193,8 @@ export const defaultStore = {
   ward: "",
   district: "",
   province: "",
-  tos: ""
-}
+  tos: "",
+};
 
 export const defaultPartner = {
   id: 0,
@@ -194,19 +202,45 @@ export const defaultPartner = {
   description: "",
   taxCode: "",
   top: "",
-}
+};
+
+export const defaultUser = {
+  id: 0,
+  fullname: "",
+  username: "",
+  phone: "",
+  province: "",
+  district: "",
+  ward: "",
+  address: "",
+  email: "",
+  birthday: null,
+  password: "",
+  role:""
+};
 
 export const typeOfPartner = [
   {
-    value : 'VIP',
-    label : 'VIP'
+    value: "VIP",
+    label: "VIP",
   },
   {
-    value : 'Thân thiết',
-    label : 'Thân thiết'
+    value: "Thân thiết",
+    label: "Thân thiết",
   },
   {
-    value : 'Thường',
-    label : 'Thường'
+    value: "Thường",
+    label: "Thường",
   },
-]
+];
+
+export const Roles = [
+  {
+    value: "Admin",
+    label: "Admin",
+  },
+  {
+    value: "Customer",
+    label: "Customer",
+  }
+];

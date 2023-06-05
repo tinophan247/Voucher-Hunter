@@ -6,6 +6,18 @@ export class ApiAuthGateWay extends ApiService {
     return this.post('customers/register', payload);
   }
 
+  getAllCustomer() {
+    return this.get(`customers/`);
+  }
+
+  updateCustomer(value) {
+    return this.put(`customers/${value.id}`, value);
+  }
+
+  deleteCustomer(value) {
+    return this.delete(`customers/${value.id}`, value);
+  }
+
   login(payload) {
     return this.post(`customers/login`, payload);
   };

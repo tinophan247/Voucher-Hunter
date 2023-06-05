@@ -104,7 +104,7 @@ const TypeOfStore = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {ToSList.length > 0 &&
+              {!isLoading && ToSList.length > 0 &&
                 ToSList.map((item, index) => (
                   <StyledTableRow key={index}>
                     <StyledTableCell component="th" scope="row">
