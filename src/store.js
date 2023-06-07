@@ -7,6 +7,7 @@ import partnerReducer from "./redux/partnerSlice";
 import typeOfStoreReducer from "./redux/typeOfStoreSlice";
 import voucherReducer from "./redux/voucherSlice";
 import storeReducer from "./redux/storeSlice";
+import eventReducer from "./redux/eventSlice";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     typeOfStore: typeOfStoreReducer,
     voucher: voucherReducer,
     store: storeReducer,
+    event : eventReducer
   },
 });
 

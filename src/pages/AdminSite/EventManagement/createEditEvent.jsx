@@ -1,16 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getListToS,
-} from "../../../redux/typeOfStoreSlice";
+import { getListToS } from "../../../redux/typeOfStoreSlice";
 import TextFields from "../../../components/TextField";
 import SingleSelect from "../../../components/SingleSelect";
 import DatePickers from "../../../components/DatePicker";
-import { createVoucher, updateVoucher } from "../../../redux/voucherSlice";
-import { defaultVoucher } from "../../../constant";
+import { defaultEvent, gameList } from "../../../constant";
+import { createEvent, updateEvent } from "../../../redux/eventSlice";
+import { getListPartner } from "../../../redux/partnerSlice";
+import { getListVoucher } from "../../../redux/voucherSlice";
+import MultipleSelect from "../../../components/MultipleSelect";
 
 const style = {
   position: "absolute",
@@ -24,19 +26,24 @@ const style = {
   p: 4,
 };
 
-export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
+export default function CreateEditEvent({
+  isShow,
+  handleCloseModal,
+  data,
+  isEdit,
+}) {
   const { ToSList } = useSelector((state) => state.typeOfStore);
+  const { partnerList } = useSelector((state) => state.partner);
+  const { VoucherList } = useSelector((state) => state.voucher);
+
   const dispatch = useDispatch();
-  const [formState, setFormState] = useState(defaultVoucher);
+  const [formState, setFormState] = useState(defaultEvent);
   const [validForm, setValidForm] = useState({
-    name: true,
-    description: true,
-    discount: true,
-    img: true,
-    code: true,
-    condition1: true,
-    condition2: true,
+    eventName: true,
+    partnerName: true,
     tos: true,
+    gameList: true,
+    selectedVoucher: true,
     startDate: true,
     endDate: true,
   });
@@ -44,14 +51,14 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
   const validateForm = () => {
     let isValid = true;
 
-    if (formState.description?.trim() === '') {
+    if (formState.eventName?.trim() === "") {
       isValid = false;
     }
 
-    Object.keys(validForm).forEach(x => {
-      if (!formState[x] || formState[x].value <= 0) {     
-          isValid = false;
-          validForm[x] = false;
+    Object.keys(validForm).forEach((x) => {
+      if (!formState[x] || formState[x].value <= 0) {
+        isValid = false;
+        validForm[x] = false;
       }
     });
 
@@ -71,30 +78,44 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
     return DataList;
   };
 
+  const convertDataPartner = (array) => {
+    const DataList = array.map((item) => ({
+      value: item.partnerName,
+      label: item.partnerName,
+    }));
+    return DataList;
+  };
+
+  const convertDataVoucher = (array) => {
+    const DataList = array.map((item) => ({
+      value: item.code,
+      label: item.code,
+    }));
+    return DataList;
+  };
+
   const handleSubmitForm = (e) => {
     try {
       e.preventDefault();
 
       if (!validateForm()) {
-        return ;
+        return;
       }
       const newData = {
         id: formState.id || undefined,
-        name: formState.name,
+        eventName: formState.eventName,
         description: formState.description,
-        discount: formState.discount,
-        img: formState.img,
-        code: formState.code,
-        condition1: formState.condition1,
-        condition2: formState.condition2,
+        partnerName: formState.partnerName,
         tos: formState.tos,
+        gameList: formState.gameList.toString(),
+        selectedVoucher: formState.selectedVoucher,
         startDate: formState.startDate,
         endDate: formState.endDate,
       };
 
       formState.id === 0
-        ? dispatch(createVoucher(newData))
-        : dispatch(updateVoucher(newData));
+        ? dispatch(createEvent(newData))
+        : dispatch(updateEvent(newData));
 
       setTimeout(() => {
         window.location.reload(true);
@@ -104,14 +125,20 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
     }
   };
 
-
   useEffect(() => {
     setFormState({ ...data });
   }, [data]);
 
   useEffect(() => {
     dispatch(getListToS());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    dispatch(getListPartner());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getListVoucher());
   }, []);
 
   return (
@@ -122,7 +149,7 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
             <div className="flex justify-between">
               <div />
               <div className="text-xl font-bold text-center">
-                Tạo mới Voucher
+                {isEdit ? "Chỉnh sửa Chiến dịch" : "Tạo mới Chiến dịch"}
               </div>
               <div
                 className="cursor-pointer"
@@ -134,19 +161,21 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
             <div className="flex justify-center mt-5">
               <div>
                 <TextFields
-                  label="Tên voucher"
+                  label="Tên chiến dịch"
                   width="500px"
-                  value={formState.name}
+                  value={formState.eventName}
                   onChange={(event) => {
                     setFormState({
                       ...formState,
-                      name: event.target.value,
+                      eventName: event.target.value,
                     });
-                    setValidForm({ ...validForm, name: !!event.target.value.trim() });
+                    setValidForm({
+                      ...validForm,
+                      eventName: !!event.target.value.trim(),
+                    });
                   }}
                   required={true}
-                valid={validForm.name}
-
+                  valid={validForm.eventName}
                 />
                 <TextFields
                   label="Mô tả"
@@ -157,79 +186,25 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
                       ...formState,
                       description: event.target.value,
                     });
-                    setValidForm({ ...validForm, description: !!event.target.value.trim() });
+                  }}
+                />
+                <SingleSelect
+                  label="Loại đối tác"
+                  width="500px"
+                  options={convertDataPartner(partnerList)}
+                  value={formState.partnerName}
+                  onChange={(event) => {
+                    setFormState({
+                      ...formState,
+                      partnerName: event.target.value,
+                    });
+                    setValidForm({
+                      ...validForm,
+                      partnerName: true,
+                    });
                   }}
                   required={true}
-                  valid={validForm.description}
-
-                />
-                <TextFields
-                  label="Giảm giá"
-                  width="500px"
-                  value={formState.discount}
-                  onChange={(event) => {
-                    setFormState({
-                      ...formState,
-                      discount: event.target.value,
-                    });
-                    setValidForm({ ...validForm, discount: !!event.target.value.trim() });
-                  }}
-                  required={true}
-                valid={validForm.description}
-
-                />
-                <TextFields
-                  label="URL ảnh"
-                  width="500px"
-                  value={formState.img}
-                  onChange={(event) => {
-                    setFormState({
-                      ...formState,
-                      img: event.target.value,
-                    });
-                  }}
-           
-                />
-                  <TextFields
-                  label="Mã code"
-                  width="500px"
-                  value={formState.code}
-                  onChange={(event) => {
-                    setFormState({
-                      ...formState,
-                      code: event.target.value,
-                    });
-                    setValidForm({ ...validForm, code: !!event.target.value.trim() });
-                  }}
-                  required={true}
-                valid={validForm.code}
-
-                />
-                <TextFields
-                  label="Điều kiện 1"
-                  width="500px"
-                  value={formState.condition1}
-                  onChange={(event) => {
-                    setFormState({
-                      ...formState,
-                      condition1: event.target.value,
-                    });
-                    setValidForm({ ...validForm, condition1: !!event.target.value.trim() });
-                  }}
-                  required={true}
-                  valid={validForm.condition1}
-
-                />
-                <TextFields
-                  label="Điều kiện 2"
-                  width="500px"
-                  value={formState.condition2}
-                  onChange={(event) => {
-                    setFormState({
-                      ...formState,
-                      condition2: event.target.value,
-                    });
-                  }}
+                  valid={validForm.partnerName}
                 />
                 <SingleSelect
                   label="Loại cửa hàng"
@@ -241,8 +216,49 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
                       ...formState,
                       tos: event.target.value,
                     });
-                  }}                 
-
+                    setValidForm({
+                      ...validForm,
+                      tos: true,
+                    });
+                  }}
+                  required={true}
+                  valid={validForm.tos}
+                />
+                <SingleSelect
+                  label="Game"
+                  width="500px"
+                  options={gameList}
+                  value={formState.gameList}
+                  onChange={(event) => {
+                    setFormState({
+                      ...formState,
+                      gameList: event.target.value,
+                    });
+                    setValidForm({
+                      ...validForm,
+                      gameList: true,
+                    });
+                  }}
+                  required={true}
+                  valid={validForm.gameList}
+                />
+                <SingleSelect
+                  label="Voucher được chọn"
+                  width="500px"
+                  options={convertDataVoucher(VoucherList)}
+                  value={formState.selectedVoucher}
+                  onChange={(event) => {
+                    setFormState({
+                      ...formState,
+                      selectedVoucher: event.target.value,
+                    });
+                    setValidForm({
+                      ...validForm,
+                      selectedVoucher: true,
+                    });
+                  }}
+                  required={true}
+                  valid={validForm.selectedVoucher}
                 />
                 <div className="mt-3">
                   <DatePickers
@@ -254,24 +270,20 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
                         ...formState,
                         startDate: event,
                       });
-                      setValidForm({ ...validForm, startDate: true });
                     }}
-                    required={true}
-                valid={validForm.startDate}
                   />
                 </div>
                 <div className="mt-3">
                   <DatePickers
                     width="500px"
-                    label="Ngày hết hạn"
+                    label="Ngày kết thúc"
                     value={formState.endDate}
                     onChange={(event) => {
                       setFormState({
                         ...formState,
                         endDate: event,
-                      });                     
-                    }}                    
-
+                      });
+                    }}
                   />
                 </div>
               </div>

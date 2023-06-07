@@ -7,6 +7,8 @@ const SingleSelect = ({
   options,
   value,
   onChange,
+  valid,
+  required,
 }) => {
   return (
     <div className='font-medium'>
@@ -24,6 +26,7 @@ const SingleSelect = ({
             renderValue={
               (value !== 0 && value !== '') ? undefined : () => <ul className='text-gray-500'>{label}</ul>
             }
+            required={required}
             MenuProps={{
               PaperProps: {
                 style: {
@@ -41,6 +44,9 @@ const SingleSelect = ({
           </Select>
         </FormControl>
       </Box>
+      <span hidden={valid || !required} className='text-red-500'>
+        {label && `Bạn chưa nhập ${label}`}
+      </span>
     </div>
   );
 };

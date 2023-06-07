@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -22,10 +23,40 @@ const style = {
 export default function CreateEditToS({ isShow, handleCloseModal, data }) {
   const dispatch = useDispatch();
   const [formState, setFormState] = useState(defaultTypeOfStore);
+  const [validForm, setValidForm] = useState({
+    description: true,
+  });
+
+  const validateForm = () => {
+    let isValid = true;
+
+    if (formState.description?.trim() === '') {
+      isValid = false;
+    }
+
+    Object.keys(validForm).forEach(x => {
+      if (!formState[x] || formState[x].value <= 0) {     
+          isValid = false;
+          validForm[x] = false;
+      }
+    });
+
+    if (!isValid) {
+      setValidForm({ ...validForm });
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmitForm = (e) => {
     try {
       e.preventDefault();
+
+      if (!validateForm()) {
+        return ;
+      }
+
       const newData = {
         id : formState.id || undefined,
         description: formState.description,
@@ -44,6 +75,11 @@ export default function CreateEditToS({ isShow, handleCloseModal, data }) {
   useEffect(() => {
     setFormState({ ...data });
   }, [data]);
+
+  useEffect(() => {
+    setValidForm({ ...validForm });
+  }, []);
+
 
   return (
     <div>
@@ -69,7 +105,10 @@ export default function CreateEditToS({ isShow, handleCloseModal, data }) {
                 value={formState.description}
                 onChange={(event) => {
                   setFormState({...formState,description : event.target.value});
+                  setValidForm({ ...validForm, description: !!event.target.value.trim() });
                 }}
+                required={true}
+                valid={validForm.description}
               />
             </div>
             <div className="flex justify-end mt-10 gap-5">

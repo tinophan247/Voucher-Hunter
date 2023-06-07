@@ -24,6 +24,32 @@ const style = {
 export default function CreateEditPartner({ isShow, handleCloseModal, data }) {
   const dispatch = useDispatch();
   const [formState, setFormState] = useState(defaultPartner);
+  const [validForm, setValidForm] = useState({
+    partnerName: true,
+    top: true,
+  });
+
+  const validateForm = () => {
+    let isValid = true;
+
+    if (formState.partnerName?.trim() === '') {
+      isValid = false;
+    }
+
+    Object.keys(validForm).forEach(x => {
+      if (!formState[x] || formState[x].value <= 0) {     
+          isValid = false;
+          validForm[x] = false;
+      }
+    });
+
+    if (!isValid) {
+      setValidForm({ ...validForm });
+      return false;
+    }
+
+    return true;
+  };
 
   useEffect(() => {
     setFormState({ ...data });
@@ -32,6 +58,11 @@ export default function CreateEditPartner({ isShow, handleCloseModal, data }) {
   const handleSubmitForm = (e) => {
     try {
       e.preventDefault();
+
+      if (!validateForm()) {
+        return ;
+      }
+
       const newData = {
         id: formState.id || undefined,
         partnerName: formState.partnerName,
@@ -51,6 +82,10 @@ export default function CreateEditPartner({ isShow, handleCloseModal, data }) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    setValidForm({ ...validForm });
+  }, []);
 
   return (
     <div>
@@ -80,7 +115,10 @@ export default function CreateEditPartner({ isShow, handleCloseModal, data }) {
                       ...formState,
                       partnerName: event.target.value,
                     });
+                    setValidForm({ ...validForm, partnerName: !!event.target.value.trim() });
                   }}
+                  required={true}
+                  valid={validForm.partnerName}
                 />
                 <TextFields
                   label="Mô tả"
@@ -114,7 +152,10 @@ export default function CreateEditPartner({ isShow, handleCloseModal, data }) {
                       ...formState,
                       top: event.target.value,
                     });
+                    setValidForm({ ...validForm, top: true});
                   }}
+                  required={true}
+                  valid={validForm.top}
                 />
               </div>
             </div>

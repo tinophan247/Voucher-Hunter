@@ -244,3 +244,30 @@ export const Roles = [
     label: "Customer",
   }
 ];
+
+export const gameList = [
+  {
+    value: "Tài xỉu",
+    label: "Tài xỉu",
+  },
+  {
+    value: "Kéo búa bao",
+    label: "Kéo búa bao",
+  },
+  {
+    value: "Bầu cua",
+    label: "Bầu cua",
+  }
+];
+
+export const defaultEvent = {
+  id : 0,
+  eventName: '',
+  description : '',
+  partnerName : '',
+  tos : '',
+  gameList : '',
+  selectedVoucher : '',
+  startDate : null,
+  endDate : null
+}

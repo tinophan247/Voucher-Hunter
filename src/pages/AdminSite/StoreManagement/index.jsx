@@ -24,7 +24,7 @@ const StoreManagement = () => {
   const { StoreList, isLoading, isSuccess, message } = useSelector(
     (state) => state.store
   );
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); //gọi action tới reducer
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [store, setStore] = useState(defaultStore);
