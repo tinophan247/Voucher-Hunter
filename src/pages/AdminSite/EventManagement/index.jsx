@@ -170,7 +170,7 @@ const EventManagement = () => {
                     </StyledTableCell>
                     <StyledTableCell align="center">{item.tos}</StyledTableCell>
                     <StyledTableCell align="center">
-                      {item.gameList}
+                      {item.game.gameName}
                     </StyledTableCell>
                     <StyledTableCell
                       title={item.selectedVoucher}

@@ -8,6 +8,7 @@ import typeOfStoreReducer from "./redux/typeOfStoreSlice";
 import voucherReducer from "./redux/voucherSlice";
 import storeReducer from "./redux/storeSlice";
 import eventReducer from "./redux/eventSlice";
+import gameReducer from "./redux/gameSlice";
 
 const store = configureStore({
   reducer: {
@@ -19,7 +20,8 @@ const store = configureStore({
     typeOfStore: typeOfStoreReducer,
     voucher: voucherReducer,
     store: storeReducer,
-    event : eventReducer
+    event : eventReducer,
+    game : gameReducer
   },
 });
 

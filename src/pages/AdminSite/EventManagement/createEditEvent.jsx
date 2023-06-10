@@ -8,10 +8,11 @@ import { getListToS } from "../../../redux/typeOfStoreSlice";
 import TextFields from "../../../components/TextField";
 import SingleSelect from "../../../components/SingleSelect";
 import DatePickers from "../../../components/DatePicker";
-import { defaultEvent, gameList } from "../../../constant";
+import { defaultEvent } from "../../../constant";
 import { createEvent, updateEvent } from "../../../redux/eventSlice";
 import { getListPartner } from "../../../redux/partnerSlice";
 import { getListVoucher } from "../../../redux/voucherSlice";
+import { getGameList } from "../../../redux/gameSlice";
 
 const style = {
   position: "absolute",
@@ -34,8 +35,7 @@ export default function CreateEditEvent({
   const { ToSList } = useSelector((state) => state.typeOfStore);
   const { partnerList } = useSelector((state) => state.partner);
   const { VoucherList } = useSelector((state) => state.voucher);
-
-  const dispatch = useDispatch();
+  const { gameListData } = useSelector((state) => state.game);
   const [formState, setFormState] = useState(defaultEvent);
   const [validForm, setValidForm] = useState({
     eventName: true,
@@ -46,6 +46,8 @@ export default function CreateEditEvent({
     startDate: true,
     endDate: true,
   });
+
+  const dispatch = useDispatch();
 
   const validateForm = () => {
     let isValid = true;
@@ -89,6 +91,14 @@ export default function CreateEditEvent({
     const DataList = array.map((item) => ({
       value: item.code,
       label: item.code,
+    }));
+    return DataList;
+  };
+
+  const convertDateGames = (array) => {
+    const DataList = array.map((item) => ({
+      value: item.id,
+      label: item.gameName,
     }));
     return DataList;
   };
@@ -138,6 +148,10 @@ export default function CreateEditEvent({
 
   useEffect(() => {
     dispatch(getListVoucher());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getGameList());
   }, []);
 
   return (
@@ -226,7 +240,7 @@ export default function CreateEditEvent({
                 <SingleSelect
                   label="Game"
                   width="500px"
-                  options={gameList}
+                  options={convertDateGames(gameListData)}
                   value={formState.gameList}
                   onChange={(event) => {
                     setFormState({

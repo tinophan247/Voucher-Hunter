@@ -20,18 +20,17 @@ const MultipleSelect = ({
   options,
   isEdit
 }) => {
-  const formatValue = (selected) => {
-    let newFormatValue = selected
-      .map((item) => options.find((e) => e.value === item).label)
-      .slice(0, 2)
-      .join(", ");
-    if (selected.length > 2) {
-      newFormatValue += ` (+${selected.length - 2})`;
-    }
+  // const formatValue = (selected) => {
+  //   let newFormatValue = selected
+  //     .map((item) => options.find((e) => e.value === item).label)
+  //     .slice(0, 2)
+  //     .join(", ");
+  //   if (selected.length > 2) {
+  //     newFormatValue += ` (+${selected.length - 2})`;
+  //   }
 
-    return newFormatValue;
-  };
-
+  //   return newFormatValue;
+  // };
   console.log(value)
 
   return (
