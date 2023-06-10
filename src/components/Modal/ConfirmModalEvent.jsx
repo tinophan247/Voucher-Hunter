@@ -1,8 +1,7 @@
 import { Box, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { defaultEvent, defaultStore } from "../../constant";
-import { deletePartner } from "../../redux/partnerSlice";
+import { defaultEvent } from "../../constant";
 import { deleteEvent } from "../../redux/eventSlice";
 
 const style = {

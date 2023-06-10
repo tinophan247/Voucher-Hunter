@@ -12,7 +12,6 @@ import { defaultEvent, gameList } from "../../../constant";
 import { createEvent, updateEvent } from "../../../redux/eventSlice";
 import { getListPartner } from "../../../redux/partnerSlice";
 import { getListVoucher } from "../../../redux/voucherSlice";
-import MultipleSelect from "../../../components/MultipleSelect";
 
 const style = {
   position: "absolute",
