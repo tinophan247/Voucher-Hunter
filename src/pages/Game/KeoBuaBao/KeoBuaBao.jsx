@@ -1,4 +1,6 @@
-import React from "react";
+/* eslint-disable eqeqeq */
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import Player from "./Player";
 import Computer from "./Computer";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,10 +8,26 @@ import { EndGame, Random } from "../../../redux/KBBSlice";
 import ModalGame from "../Modal";
 import Header from "../../../components/Header";
 import ExtraHeader from "../../../components/ExtraHeader";
+import { getAllCustomer, updateCustomer } from "../../../redux/authSlice";
+import { getListEvent } from "../../../redux/eventSlice";
+import { getListVoucher } from "../../../redux/voucherSlice";
 
 const KeoBuaBao = () => {
   const dispatch = useDispatch();
   const { result } = useSelector((state) => state.KBB);
+  const { eventList } = useSelector((state) => state.event);
+  const { VoucherList } = useSelector((state) => state.voucher);
+
+  const filterGame = eventList.filter(
+    (item) => item.game.gameName === "Kéo búa bao"
+  );
+  const selectedVoucher = filterGame.map((item) => item.selectedVoucher);
+  const randomVoucher = Math.floor(Math.random() * selectedVoucher.length);
+
+  const filterVoucher = VoucherList.filter(
+    (item) => item.code == selectedVoucher[randomVoucher]
+  );
+  const userId = localStorage.getItem("id");
 
   const handlePlayGame = () => {
     let count = 0;
@@ -24,6 +42,28 @@ const KeoBuaBao = () => {
       }
     }, 100);
   };
+
+  useEffect(() => {
+    if (result === "Thắng") {
+      const newData = {
+        id: userId,
+        voucherList: filterVoucher[0].id,
+      };
+      userId && dispatch(updateCustomer(newData));
+    }
+  });
+
+  useEffect(() => {
+    dispatch(getListEvent());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getAllCustomer());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getListVoucher());
+  }, []);
 
   return (
     <div className="w-full h-full">
@@ -57,7 +97,13 @@ const KeoBuaBao = () => {
               <Computer />
             </div>
           </div>
-          {result === "Thắng" && <ModalGame showModal={true} />}
+          {result === "Thắng" && (
+            <ModalGame
+              showModal={true}
+              voucher={selectedVoucher[randomVoucher]}
+              userId={userId}
+            />
+          )}
         </div>
       </div>
     </div>

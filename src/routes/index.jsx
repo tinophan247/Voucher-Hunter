@@ -3,8 +3,6 @@ import HomePage from "../pages/HomePage";
 import TaiXiu from "../pages/Game/TaiXiu/TaiXiu";
 import KeoBuaBao from "../pages/Game/KeoBuaBao/KeoBuaBao";
 import BauCua from "../pages/Game/BauCua/BauCua";
-import MyVoucher from "../pages/MyVoucher";
-import Voucher from "../components/Voucher";
 import AdminSite from "../pages/AdminSite";
 import VoucherManagement from "../pages/AdminSite/VoucherManagement";
 import PartnerManagement from "../pages/AdminSite/ParterManagement";
@@ -15,6 +13,7 @@ import TypeOfStore from "../pages/AdminSite/TypeOfStore";
 import Login from "../pages/Login";
 import StoreManagement from "../pages/AdminSite/StoreManagement";
 import { Routes, Route } from "react-router-dom";
+import MyVoucherList from '../pages/MyVoucher/MyVoucherList';
 
 const Router = () => {
   return (
@@ -23,8 +22,7 @@ const Router = () => {
       <Route path="/TaiXiu" element={<TaiXiu />} />
       <Route path="/KeoBuaBao" element={<KeoBuaBao />} />
       <Route path="/BauCua" element={<BauCua />} />
-      <Route path="/my-voucher" element={<MyVoucher />} />
-      <Route path="/my-voucher-details" element={<Voucher />} />
+      <Route path="/my-voucher" element={<MyVoucherList />} />
       <Route path="/admin" element={<AdminSite />} />
       <Route path="/voucher-management" element={<VoucherManagement />} />
       <Route path="/partner-management" element={<PartnerManagement />} />

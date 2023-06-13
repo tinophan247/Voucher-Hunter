@@ -1,16 +1,56 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import XucXac from "./XucXac";
 import { useDispatch, useSelector } from "react-redux";
 import { DiceBeting, PlayGame } from "../../../redux/ChineseDiceSlice";
 import ModalGame from "../Modal";
 import Header from "../../../components/Header";
 import ExtraHeader from "../../../components/ExtraHeader";
+import { getAllCustomer, updateCustomer } from "../../../redux/authSlice";
+import { getListEvent } from "../../../redux/eventSlice";
+import { getListVoucher } from "../../../redux/voucherSlice";
 
 const TaiXiu = () => {
   const { chineseDice, result, status } = useSelector(
     (state) => state.chineseDice
   );
   const dispatch = useDispatch();
+  const { eventList } = useSelector((state) => state.event);
+  const { VoucherList } = useSelector((state) => state.voucher);
+
+  const filterGame = eventList.filter(
+    (item) => item.game.gameName === "Tài xỉu"
+  );
+  const selectedVoucher = filterGame.map((item) => item.selectedVoucher);
+  const randomVoucher = Math.floor(Math.random() * selectedVoucher.length);
+
+  // eslint-disable-next-line eqeqeq
+  const filterVoucher = VoucherList.filter(
+    (item) => item.code == selectedVoucher[randomVoucher]
+  );
+  const userId = localStorage.getItem("id");
+
+  useEffect(() => {
+    if (status) {
+      const newData = {
+        id: userId,
+        voucherList: filterVoucher[0].id,
+      };
+      userId && dispatch(updateCustomer(newData));
+    }
+  });
+
+  useEffect(() => {
+    dispatch(getListEvent());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getAllCustomer());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getListVoucher());
+  }, []);
 
   return (
     <div className="w-full h-full">
@@ -73,7 +113,13 @@ const TaiXiu = () => {
               Start
             </button>
           </div>
-          {status && <ModalGame showModal={true} />}
+          {status && (
+            <ModalGame
+              showModal={status}
+              voucher={selectedVoucher[randomVoucher]}
+              userId={userId}
+            />
+          )}
         </div>
       </div>
     </div>

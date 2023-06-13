@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import { authActions } from "../../redux/authSlice";
 
 const Header = () => {
-  const { isLoggedIn, credentials } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const name = localStorage.getItem("name");
+  const avatar = localStorage.getItem("avatar");
 
-  const handleLogOut = async () => {
+  const handleLogOut = () => {
     dispatch(authActions.logout());
     localStorage.clear();
   };
@@ -17,22 +19,7 @@ const Header = () => {
       <Link to="/" className="uppercase font-bold text-4xl flex items-center">
         Voucher Hunter
       </Link>
-      {isLoggedIn ? (
-        <div className="flex gap-10 items-center text-xl font-bold">
-          <p>Xin Chào, {credentials.name}</p>
-          <img
-            src={credentials.avatar ? credentials.avatar : "./img/avatar.jpg"}
-            alt="not-found"
-            className="w-12 h-12 rounded-full"
-          />
-          <button
-            onClick={() => handleLogOut()}
-            className="bg-green-neon hover:bg-green-neon-hover w-32 h-10 rounded-lg "
-          >
-            Log out
-          </button>
-        </div>
-      ) : (
+      {( !isLoggedIn) ? (
         <div className="grid grid-cols-3 gap-10 items-center text-xl font-bold">
           <Link to="/register">
             <button className="bg-green-neon hover:bg-green-neon-hover w-32 h-10 rounded-lg  ">
@@ -52,7 +39,22 @@ const Header = () => {
             />
           </Link>
         </div>
-      )}
+      ) :(
+        <div className="flex gap-10 items-center text-xl font-bold">
+          <p>Xin Chào, {name}</p>
+          <img
+            src={avatar ? avatar : "./img/avatar.jpg"}
+            alt="not-found"
+            className="w-12 h-12 rounded-full"
+          />
+          <button
+            onClick={() => handleLogOut()}
+            className="bg-green-neon hover:bg-green-neon-hover w-32 h-10 rounded-lg "
+          >
+            Log out
+          </button>
+        </div>
+      ) }
     </div>
   );
 };

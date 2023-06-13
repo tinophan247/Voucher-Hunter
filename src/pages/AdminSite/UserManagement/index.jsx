@@ -178,7 +178,7 @@ const UserManagement = () => {
                   {moment(item.birthday).format("DD/MM/YYYY")}
                   </StyledTableCell>
                   <StyledTableCell title='' align="center">
-                    <div className=" truncate w-32"></div>
+                    <div className=" truncate w-32">{item.voucher.code}</div>
                   </StyledTableCell>
                   <StyledTableCell align="center">{item.role}</StyledTableCell>
                   <StyledTableCell>

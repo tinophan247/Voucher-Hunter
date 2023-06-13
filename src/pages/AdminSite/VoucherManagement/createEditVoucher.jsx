@@ -3,9 +3,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getListToS,
-} from "../../../redux/typeOfStoreSlice";
+import { getListToS } from "../../../redux/typeOfStoreSlice";
 import TextFields from "../../../components/TextField";
 import SingleSelect from "../../../components/SingleSelect";
 import DatePickers from "../../../components/DatePicker";
@@ -30,12 +28,8 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
   const [formState, setFormState] = useState(defaultVoucher);
   const [validForm, setValidForm] = useState({
     name: true,
-    description: true,
     discount: true,
-    img: true,
-    code: true,
     condition1: true,
-    condition2: true,
     tos: true,
     startDate: true,
     endDate: true,
@@ -44,14 +38,10 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
   const validateForm = () => {
     let isValid = true;
 
-    if (formState.description?.trim() === '') {
-      isValid = false;
-    }
-
-    Object.keys(validForm).forEach(x => {
-      if (!formState[x] || formState[x].value <= 0) {     
-          isValid = false;
-          validForm[x] = false;
+    Object.keys(validForm).forEach((x) => {
+      if (!formState[x] || formState[x].value <= 0) {
+        isValid = false;
+        validForm[x] = false;
       }
     });
 
@@ -76,7 +66,7 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
       e.preventDefault();
 
       if (!validateForm()) {
-        return ;
+        return;
       }
       const newData = {
         id: formState.id || undefined,
@@ -84,7 +74,6 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
         description: formState.description,
         discount: formState.discount,
         img: formState.img,
-        code: formState.code,
         condition1: formState.condition1,
         condition2: formState.condition2,
         tos: formState.tos,
@@ -104,14 +93,13 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
     }
   };
 
-
   useEffect(() => {
     setFormState({ ...data });
   }, [data]);
 
   useEffect(() => {
     dispatch(getListToS());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -142,11 +130,13 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
                       ...formState,
                       name: event.target.value,
                     });
-                    setValidForm({ ...validForm, name: !!event.target.value.trim() });
+                    setValidForm({
+                      ...validForm,
+                      name: !!event.target.value.trim(),
+                    });
                   }}
                   required={true}
-                valid={validForm.name}
-
+                  valid={validForm.name}
                 />
                 <TextFields
                   label="Mô tả"
@@ -157,11 +147,7 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
                       ...formState,
                       description: event.target.value,
                     });
-                    setValidForm({ ...validForm, description: !!event.target.value.trim() });
                   }}
-                  required={true}
-                  valid={validForm.description}
-
                 />
                 <TextFields
                   label="Giảm giá"
@@ -172,11 +158,13 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
                       ...formState,
                       discount: event.target.value,
                     });
-                    setValidForm({ ...validForm, discount: !!event.target.value.trim() });
+                    setValidForm({
+                      ...validForm,
+                      discount: !!event.target.value.trim(),
+                    });
                   }}
                   required={true}
-                valid={validForm.description}
-
+                  valid={validForm.description}
                 />
                 <TextFields
                   label="URL ảnh"
@@ -188,22 +176,6 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
                       img: event.target.value,
                     });
                   }}
-           
-                />
-                  <TextFields
-                  label="Mã code"
-                  width="500px"
-                  value={formState.code}
-                  onChange={(event) => {
-                    setFormState({
-                      ...formState,
-                      code: event.target.value,
-                    });
-                    setValidForm({ ...validForm, code: !!event.target.value.trim() });
-                  }}
-                  required={true}
-                valid={validForm.code}
-
                 />
                 <TextFields
                   label="Điều kiện 1"
@@ -214,11 +186,13 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
                       ...formState,
                       condition1: event.target.value,
                     });
-                    setValidForm({ ...validForm, condition1: !!event.target.value.trim() });
+                    setValidForm({
+                      ...validForm,
+                      condition1: !!event.target.value.trim(),
+                    });
                   }}
                   required={true}
                   valid={validForm.condition1}
-
                 />
                 <TextFields
                   label="Điều kiện 2"
@@ -241,8 +215,7 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
                       ...formState,
                       tos: event.target.value,
                     });
-                  }}                 
-
+                  }}
                 />
                 <div className="mt-3">
                   <DatePickers
@@ -254,10 +227,7 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
                         ...formState,
                         startDate: event,
                       });
-                      setValidForm({ ...validForm, startDate: true });
                     }}
-                    required={true}
-                valid={validForm.startDate}
                   />
                 </div>
                 <div className="mt-3">
@@ -269,9 +239,8 @@ export default function CreateEditVoucher({ isShow, handleCloseModal, data }) {
                       setFormState({
                         ...formState,
                         endDate: event,
-                      });                     
-                    }}                    
-
+                      });
+                    }}
                   />
                 </div>
               </div>
