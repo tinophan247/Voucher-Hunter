@@ -13,6 +13,7 @@ import { createEvent, updateEvent } from "../../../redux/eventSlice";
 import { getListPartner } from "../../../redux/partnerSlice";
 import { getListVoucher } from "../../../redux/voucherSlice";
 import { getGameList } from "../../../redux/gameSlice";
+import MultipleSelect from "../../../components/MultipleSelect";
 
 const style = {
   position: "absolute",
@@ -97,7 +98,7 @@ export default function CreateEditEvent({
 
   const convertDateGames = (array) => {
     const DataList = array.map((item) => ({
-      value: item.id,
+      value: item.gameName,
       label: item.gameName,
     }));
     return DataList;
@@ -116,7 +117,7 @@ export default function CreateEditEvent({
         description: formState.description,
         partnerName: formState.partnerName,
         tos: formState.tos,
-        gameList: formState.gameList.toString(),
+        gameList: formState.gameList,
         selectedVoucher: formState.selectedVoucher,
         startDate: formState.startDate,
         endDate: formState.endDate,
@@ -237,7 +238,7 @@ export default function CreateEditEvent({
                   required={true}
                   valid={validForm.tos}
                 />
-                <SingleSelect
+                <MultipleSelect
                   label="Game"
                   width="500px"
                   options={convertDateGames(gameListData)}

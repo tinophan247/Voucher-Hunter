@@ -8,7 +8,7 @@ const MyVoucherTR = ({ item, handleEdit }) => {
     <StyledTableRow>
       <StyledTableCell component="th" scope="row">
         <img
-          src={item.voucher.img ? item.voucher.img : "./img/Banner.png"}
+          src={item.img ? item.img : "./img/Banner.png"}
           className="w-400 h-28"
           alt="not-found"
         />
@@ -17,13 +17,13 @@ const MyVoucherTR = ({ item, handleEdit }) => {
         style={{ fontWeight: 600, fontSize: "18px" }}
         align="center"
       >
-        {item.voucher.code}
+        {item.code}
       </StyledTableCell>
       <StyledTableCell
         style={{ fontWeight: 600, fontSize: "18px" }}
         align="center"
       >
-        {moment(item.voucher.endDate).format("DD/MM/YYYY")}
+        {moment(item.endDate).format("DD/MM/YYYY")}
       </StyledTableCell>
       <StyledTableCell
         style={{ fontWeight: 600, fontSize: "18px" }}

@@ -17,17 +17,32 @@ const KeoBuaBao = () => {
   const { result } = useSelector((state) => state.KBB);
   const { eventList } = useSelector((state) => state.event);
   const { VoucherList } = useSelector((state) => state.voucher);
+  const { userList } = useSelector((state) => state.auth);
+  const userId = sessionStorage.getItem("id");
 
-  const filterGame = eventList.filter(
-    (item) => item.game.gameName === "Kéo búa bao"
+  //Lọc từ event các event có game là Tài Xỉu
+  const filterEvent = eventList.filter(
+    (item) => {
+      const index = item.dataValues.gameList.findIndex(i => i == "Kéo búa bao" )
+      return index !== -1
+    }
   );
-  const selectedVoucher = filterGame.map((item) => item.selectedVoucher);
+  //lấy list voucher được tạo từ event được lọc
+  const selectedVoucher = filterEvent.map((item) => item.dataValues.selectedVoucher);
+
+  //Lấy ngẫu nhiên 1 voucher trong list voucher được chọn
   const randomVoucher = Math.floor(Math.random() * selectedVoucher.length);
 
+  //Dò trong danh sách voucher, voucher nào có code bằng với voucher của event
   const filterVoucher = VoucherList.filter(
-    (item) => item.code == selectedVoucher[randomVoucher]
+    (item) => item.code === selectedVoucher[randomVoucher]
   );
-  const userId = localStorage.getItem("id");
+
+  //Lọc ra user có id bằng với id đăng nhập
+  const filterUser = userList.filter(item => item.dataValues.id == userId)
+
+  //Nối mảng voucher hiện có và voucher mới
+  const concatVoucherList = filterUser[0].dataValues.voucherList.concat([filterVoucher[0].code]);
 
   const handlePlayGame = () => {
     let count = 0;
@@ -47,11 +62,11 @@ const KeoBuaBao = () => {
     if (result === "Thắng") {
       const newData = {
         id: userId,
-        voucherList: filterVoucher[0].id,
+        voucherList: concatVoucherList,
       };
       userId && dispatch(updateCustomer(newData));
     }
-  });
+  },[result]);
 
   useEffect(() => {
     dispatch(getListEvent());

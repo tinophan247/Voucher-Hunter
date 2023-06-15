@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
@@ -20,32 +21,47 @@ import MyVoucherTR from "./MyVoucherTR";
 const MyVoucherList = () => {
   const dispatch = useDispatch();
   const { userList } = useSelector((state) => state.auth);
+  const { VoucherList } = useSelector((state) => state.voucher);
   const [showModal, setShowModal] = useState(false);
   const [voucher, setVoucher] = useState(defaultVoucher);
+  const userId = sessionStorage.getItem("id");
+
+  //Dò id người dùng xem id nào bằng với id đã đăng nhập
+  const filteruser = userList.filter((item) => item.dataValues.id == userId);
+
+  //Dò trong danh sách voucher, voucher nào có code bằng với voucher trong list voucher của người dùng
+  const filterFunc = (voucherList , user) => {
+    let list = []
+    user[0].dataValues.voucherList.forEach(item => {
+      voucherList.forEach(it => {
+        if(it.code === item) {
+          list.push(it)
+        }
+      })
+    })
+    return list
+  }
+
+  const myVoucherList = filterFunc(VoucherList,filteruser)
 
   const handleCloseModal = () => {
     setShowModal(false);
     setVoucher(defaultVoucher);
   };
-  const userId = localStorage.getItem("id");
-
-  // eslint-disable-next-line eqeqeq
-  const filteruser = userList.filter(item => item.id == userId);
-
 
   const handleEdit = (item) => {
     setVoucher({
-      id: item.voucher.id,
-      name: item.voucher.name,
-      description: item.voucher.description,
-      discount: item.voucher.discount,
-      img: item.voucher.img,
-      code: item.voucher.code,
-      condition1: item.voucher.condition1,
-      condition2: item.voucher.condition2,
-      tos: item.voucher.tos,
-      startDate: dayjs(item.voucher.startDate),
-      endDate: dayjs(item.voucher.endDate),
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      discount: item.discount,
+      img: item.img,
+      code: item.code,
+      condition1: item.condition1,
+      condition2: item.condition2,
+      tos: item.tos,
+      startDate: dayjs(item.startDate),
+      endDate: dayjs(item.endDate),
     });
     setShowModal(true);
   };
@@ -92,8 +108,8 @@ const MyVoucherList = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filteruser.length > 0 &&
-                  filteruser.map((item, index) => (
+                {myVoucherList.length > 0 &&
+                  myVoucherList.map((item, index) => (
                     <MyVoucherTR
                       item={item}
                       key={index}

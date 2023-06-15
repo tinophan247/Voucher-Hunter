@@ -1,5 +1,9 @@
 import { Box, Modal, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { StopStatus } from "../../../redux/ChineseDiceSlice";
+import { StopResultKBB } from "../../../redux/KBBSlice";
+import { StopResultBauCua } from "../../../redux/BauCua";
 
 const style = {
   position: "absolute",
@@ -13,18 +17,20 @@ const style = {
   p: 4,
 };
 
-const ModalGame = ({ showModal, voucher, userId }) => {
-  const [open, setOpen] = useState(showModal);
 
+const ModalGame = ({ showModal, voucher, userId }) => {
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(showModal);
+  const handleClose = () => {
+    setOpen(false);
+    dispatch(StopStatus());
+    dispatch(StopResultKBB());
+    dispatch(StopResultBauCua());
+  }
   return (
     <Modal
       open={open}
-      onClose={() => 
-        {setOpen(false);
-          setTimeout(() => {
-            window.location.reload(true);
-          }, 1000);
-        }}
+      onClose={() => handleClose() }
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >

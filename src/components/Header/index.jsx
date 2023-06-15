@@ -6,12 +6,12 @@ import { authActions } from "../../redux/authSlice";
 const Header = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const name = localStorage.getItem("name");
-  const avatar = localStorage.getItem("avatar");
+  const name = sessionStorage.getItem("name");
+  const avatar = sessionStorage.getItem("avatar");
 
   const handleLogOut = () => {
     dispatch(authActions.logout());
-    localStorage.clear();
+    sessionStorage.clear();
   };
 
   return (

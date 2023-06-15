@@ -15,6 +15,9 @@ const KBBSlice = createSlice({
   name: "KBB",
   initialState: initialState,
   reducers: {
+    StopResultKBB: (state) => {
+      state.result = undefined
+    },
     KBBBeting: (state, action) => {
       //Reset mảng cược
       let KBBArrayUpdate = [...state.KBBArray];
@@ -71,5 +74,5 @@ const KBBSlice = createSlice({
   },
 });
 
-export const { KBBBeting, Random, EndGame } = KBBSlice.actions;
+export const { KBBBeting, Random, EndGame ,StopResultKBB} = KBBSlice.actions;
 export default KBBSlice.reducer;

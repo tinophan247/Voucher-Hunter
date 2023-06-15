@@ -15,6 +15,9 @@ const chineseDiceSlice = createSlice({
   name: "chineseDice",
   initialState: initialState,
   reducers: {
+    StopStatus: (state) => {
+      state.status = undefined
+    },
     DiceBeting: (state, action) => {
       state.chineseDice = action.payload;
     },
@@ -60,5 +63,5 @@ const chineseDiceSlice = createSlice({
   },
 });
 
-export const { DiceBeting, PlayGame } = chineseDiceSlice.actions;
+export const { DiceBeting, PlayGame, StopStatus } = chineseDiceSlice.actions;
 export default chineseDiceSlice.reducer;

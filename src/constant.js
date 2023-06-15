@@ -266,7 +266,7 @@ export const defaultEvent = {
   description : '',
   partnerName : '',
   tos : '',
-  gameList : '',
+  gameList : [],
   selectedVoucher : '',
   startDate : null,
   endDate : null

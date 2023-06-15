@@ -43,24 +43,24 @@ const UserManagement = () => {
 
   const handleEdit = (item) => {
     setUser({
-      id: item.id,
-      fullname: item.fullname,
-      email: item.email,
-      phone: item.phone,
-      province: item.province,
-      district: item.district,
-      ward: item.ward,
-      address: item.address,
-      birthday: dayjs(item.birthday) ,
-      password: item.password,
-      role: item.role
+      id: item.dataValues.id,
+      fullname: item.dataValues.fullname,
+      email: item.dataValues.email,
+      phone: item.dataValues.phone,
+      province: item.dataValues.province,
+      district: item.dataValues.district,
+      ward: item.dataValues.ward,
+      address: item.dataValues.address,
+      birthday: dayjs(item.dataValues.birthday) ,
+      password: item.dataValues.password,
+      role: item.dataValues.role
     });
     setIsEdit(true);
   };
 
   const handleDelete = (item) => {
     setUser({
-      id: item.id,
+      id: item.dataValues.id,
     });
     setShowModal(true);
   };
@@ -155,32 +155,32 @@ const UserManagement = () => {
               userList.map((item, index) => (
                 <StyledTableRow key={index}>
                   <StyledTableCell component="th" scope="row">
-                    {item.id}
+                    {item.dataValues.id}
                   </StyledTableCell>
-                  <StyledTableCell title={item.fullname} align="center">
-                    <div className=" truncate w-32">{item.fullname}</div>
+                  <StyledTableCell title={item.dataValues.fullname} align="center">
+                    <div className=" truncate w-32">{item.dataValues.fullname}</div>
                   </StyledTableCell>
-                  <StyledTableCell title={item.email} align="center">
-                    <div className=" truncate w-32">{item.email}</div>
+                  <StyledTableCell title={item.dataValues.email} align="center">
+                    <div className=" truncate w-32">{item.dataValues.email}</div>
                   </StyledTableCell>
-                  <StyledTableCell align="center">{item.phone}</StyledTableCell>
-                  <StyledTableCell title={item.address} align="center">
-                    <div className=" truncate w-32">{item.address}</div>
+                  <StyledTableCell align="center">{item.dataValues.phone}</StyledTableCell>
+                  <StyledTableCell title={item.dataValues.address} align="center">
+                    <div className=" truncate w-32">{item.dataValues.address}</div>
                   </StyledTableCell>
-                  <StyledTableCell align="center">{item.ward}</StyledTableCell>
+                  <StyledTableCell align="center">{item.dataValues.ward}</StyledTableCell>
                   <StyledTableCell align="center">
-                    {item.district}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    {item.province}
+                    {item.dataValues.district}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                  {moment(item.birthday).format("DD/MM/YYYY")}
+                    {item.dataValues.province}
                   </StyledTableCell>
-                  <StyledTableCell title='' align="center">
-                    <div className=" truncate w-32">{item.voucher.code}</div>
+                  <StyledTableCell align="center">
+                  {moment(item.dataValues.birthday).format("DD/MM/YYYY")}
                   </StyledTableCell>
-                  <StyledTableCell align="center">{item.role}</StyledTableCell>
+                  <StyledTableCell title={item.dataValues.voucherList.toString()} align="center">
+                    <div className=" truncate w-32">{item.dataValues.voucherList.toString()}</div>
+                  </StyledTableCell>
+                  <StyledTableCell align="center">{item.dataValues.role}</StyledTableCell>
                   <StyledTableCell>
                       <div className="flex justify-end gap-2">
                         <div

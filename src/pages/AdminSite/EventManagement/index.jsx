@@ -49,15 +49,15 @@ const EventManagement = () => {
 
   const handleEdit = (item) => {
     setEvent({
-      id: item.id,
-      eventName: item.eventName,
-      description: item.description,
-      partnerName: item.partnerName,
-      tos: item.tos,
-      gameList: item.gameList,
-      selectedVoucher: item.selectedVoucher,
-      startDate: dayjs(item.startDate),
-      endDate: dayjs(item.endDate),
+      id: item.dataValues.id,
+      eventName: item.dataValues.eventName,
+      description: item.dataValues.description,
+      partnerName: item.dataValues.partnerName,
+      tos: item.dataValues.tos,
+      gameList: item.dataValues.gameList,
+      selectedVoucher: item.dataValues.selectedVoucher,
+      startDate: dayjs(item.dataValues.startDate),
+      endDate: dayjs(item.dataValues.endDate),
     });
     setIsEdit(true);
   };
@@ -157,34 +157,34 @@ const EventManagement = () => {
                 eventList.map((item, index) => (
                   <StyledTableRow key={index}>
                     <StyledTableCell component="th" scope="row">
-                      {item.id}
+                      {item.dataValues.id}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {item.eventName}
+                      {item.dataValues.eventName}
                     </StyledTableCell>
-                    <StyledTableCell title={item.description} align="center">
-                      <div className=" truncate w-40">{item.description}</div>
+                    <StyledTableCell title={item.dataValues.description} align="center">
+                      <div className=" truncate w-40">{item.dataValues.description}</div>
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {item.partnerName}
+                      {item.dataValues.partnerName}
                     </StyledTableCell>
-                    <StyledTableCell align="center">{item.tos}</StyledTableCell>
+                    <StyledTableCell align="center">{item.dataValues.tos}</StyledTableCell>
                     <StyledTableCell align="center">
-                      {item.game.gameName}
+                      {item.dataValues.gameList.toString()}
                     </StyledTableCell>
                     <StyledTableCell
-                      title={item.selectedVoucher}
+                      title={item.dataValues.selectedVoucher}
                       align="center"
                     >
                       <div className=" truncate w-40">
-                        {item.selectedVoucher}
+                        {item.dataValues.selectedVoucher}
                       </div>
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {moment(item.startDate).format("DD/MM/YYYY")}
+                      {moment(item.dataValues.startDate).format("DD/MM/YYYY")}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {moment(item.endDate).format("DD/MM/YYYY")}
+                      {moment(item.dataValues.endDate).format("DD/MM/YYYY")}
                     </StyledTableCell>
                     <StyledTableCell>
                       <div className="flex justify-end gap-2">

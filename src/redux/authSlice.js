@@ -3,10 +3,10 @@ import ApiAuthGateWay from "../services/api.authGateWay";
 
 export const login = createAsyncThunk("auth/login", async (payload) => {
   const response = await ApiAuthGateWay.login(payload);
-  localStorage.setItem("access_token", response.token);
-  localStorage.setItem("id", response.id);
-  localStorage.setItem("name", response.fullName);
-  localStorage.setItem("avatar", response.avatar);
+  sessionStorage.setItem("access_token", response.token);
+  sessionStorage.setItem("id", response.id);
+  sessionStorage.setItem("name", response.fullName);
+  sessionStorage.setItem("avatar", response.avatar);
   return response;
 });
 
@@ -104,7 +104,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.error = true;
       state.errorMessage = action.error.message;
-      localStorage.setItem('isLogin',state.isLoggedIn )
+      sessionStorage.setItem('isLogin',state.isLoggedIn )
     });
 
     //request pending

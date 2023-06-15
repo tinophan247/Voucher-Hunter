@@ -18,6 +18,9 @@ const BauCuaSlice = createSlice({
   name: "BauCua",
   initialState: initialState,
   reducers: {
+    StopResultBauCua: (state) => {
+      state.result = undefined
+    },
     BauCuaBetingUp: (state, action) => {
       const BauCuaArrayUpdate = [...state.BauCuaArray];
       const index = BauCuaArrayUpdate.findIndex(
@@ -93,6 +96,6 @@ const BauCuaSlice = createSlice({
   },
 });
 
-export const { BauCuaBetingUp, BauCuaBetingDown, PlayAgain, PlayGame } =
+export const { BauCuaBetingUp, BauCuaBetingDown, PlayAgain, PlayGame, StopResultBauCua } =
   BauCuaSlice.actions;
 export default BauCuaSlice.reducer;
