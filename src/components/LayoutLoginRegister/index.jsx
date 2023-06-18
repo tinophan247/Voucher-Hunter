@@ -19,7 +19,7 @@ const LayoutLoginRegister = ({ children, name }) => {
       <div className=" h-600 bg-[#578e44] mt-10">
         <div className="w-full flex justify-around">
           <img src="./img/Banner.png" alt="not-found" className="mt-10" />
-          <form className="flex items-center">{children}</form>
+          <div>{children}</div>
         </div>
       </div>
     </div>

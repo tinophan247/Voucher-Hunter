@@ -90,8 +90,8 @@ export default function CreateEditEvent({
 
   const convertDataVoucher = (array) => {
     const DataList = array.map((item) => ({
-      value: item.code,
-      label: item.code,
+      value: item.name,
+      label: item.name,
     }));
     return DataList;
   };

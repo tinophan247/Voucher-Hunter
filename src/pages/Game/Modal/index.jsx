@@ -44,7 +44,7 @@ const ModalGame = ({ showModal, voucher, userId }) => {
           </Typography>
         ) : (
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Mã voucher của bạn là :
+            Bạn đã nhận được voucher :
             <span className="font-bold text-red-500">{voucher}</span>
           </Typography>
         )}

@@ -37,14 +37,14 @@ const TaiXiu = () => {
 
   //Dò trong danh sách voucher, voucher nào có code bằng với voucher của event
   const filterVoucher = VoucherList.filter(
-    (item) => item.code === selectedVoucher[randomVoucher]
+    (item) => item.name === selectedVoucher[randomVoucher]
   );
 
   //Lọc ra user có id bằng với id đăng nhập
   const filterUser = userList.filter(item => item.dataValues.id == userId)
 
   //Nối mảng voucher hiện có và voucher mới
-  const concatVoucherList = filterUser[0].dataValues.voucherList.concat([filterVoucher[0].code]);
+  const concatVoucherList = filterUser[0].dataValues.voucherList.concat([filterVoucher[0].name]);
 
   useEffect(() => {
     if (status) {

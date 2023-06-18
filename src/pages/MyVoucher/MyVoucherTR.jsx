@@ -17,7 +17,7 @@ const MyVoucherTR = ({ item, handleEdit }) => {
         style={{ fontWeight: 600, fontSize: "18px" }}
         align="center"
       >
-        {item.code}
+        {item.name}
       </StyledTableCell>
       <StyledTableCell
         style={{ fontWeight: 600, fontSize: "18px" }}

@@ -34,7 +34,7 @@ const MyVoucherList = () => {
     let list = []
     user[0].dataValues.voucherList.forEach(item => {
       voucherList.forEach(it => {
-        if(it.code === item) {
+        if(it.name === item) {
           list.push(it)
         }
       })
@@ -91,7 +91,7 @@ const MyVoucherList = () => {
                     style={{ textTransform: "uppercase" }}
                     align="center"
                   >
-                    Code
+                    Tên Voucher
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ textTransform: "uppercase" }}

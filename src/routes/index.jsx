@@ -14,11 +14,18 @@ import Login from "../pages/Login";
 import StoreManagement from "../pages/AdminSite/StoreManagement";
 import { Routes, Route } from "react-router-dom";
 import MyVoucherList from '../pages/MyVoucher/MyVoucherList';
+import { useSelector } from 'react-redux';
+import PrivateRoute from '../components/PrivateRoute';
+import PrivateRouteAdmin from '../components/PrivateRoute/Admin';
 
 const Router = () => {
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path='/' element={<PrivateRoute/>} />
+      <Route exact path='/loginAdmin' element={<PrivateRouteAdmin isLoggedIn={isLoggedIn}/>} />
+      <Route path="/home" element={<HomePage />} />
       <Route path="/TaiXiu" element={<TaiXiu />} />
       <Route path="/KeoBuaBao" element={<KeoBuaBao />} />
       <Route path="/BauCua" element={<BauCua />} />
