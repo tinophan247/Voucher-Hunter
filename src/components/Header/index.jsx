@@ -31,13 +31,11 @@ const Header = () => {
               Sign In
             </button>
           </Link>
-          <Link to="/admin">
             <img
               src="./img/avatar.jpg"
               alt="not-found"
               className="w-12 h-12 rounded-full"
             />
-          </Link>
         </div>
       ) :(
         <div className="flex gap-10 items-center text-xl font-bold">

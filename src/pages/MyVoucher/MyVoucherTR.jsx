@@ -23,6 +23,12 @@ const MyVoucherTR = ({ item, handleEdit }) => {
         style={{ fontWeight: 600, fontSize: "18px" }}
         align="center"
       >
+        {item.code}
+      </StyledTableCell>
+      <StyledTableCell
+        style={{ fontWeight: 600, fontSize: "18px" }}
+        align="center"
+      >
         {moment(item.endDate).format("DD/MM/YYYY")}
       </StyledTableCell>
       <StyledTableCell

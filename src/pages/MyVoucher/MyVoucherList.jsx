@@ -97,6 +97,12 @@ const MyVoucherList = () => {
                     style={{ textTransform: "uppercase" }}
                     align="center"
                   >
+                    Mã Voucher
+                  </StyledTableCell>
+                  <StyledTableCell
+                    style={{ textTransform: "uppercase" }}
+                    align="center"
+                  >
                     Hạn sử dụng
                   </StyledTableCell>
                   <StyledTableCell
